@@ -17,6 +17,8 @@ std::vector<Scientist> ScientistService::getAllScientists(std::string orderBy, b
 
     std::sort(scientists.begin(), scientists.end(), ScientistComparator(orderBy, orderAscending));
 
+    int i = 0;
+
     return scientists;
 }
 
