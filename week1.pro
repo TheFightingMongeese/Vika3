@@ -1,5 +1,6 @@
 QT += core
 QT -= gui
+QT += sql
 
 TARGET = week1
 CONFIG += console
@@ -25,4 +26,7 @@ HEADERS += \
     ui/consoleui.h \
     utilities/scientistcomparator.h \
     utilities/enums.h
+
+DISTFILES += \
+    scientists.sqlite
 

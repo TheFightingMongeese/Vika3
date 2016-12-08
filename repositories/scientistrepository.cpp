@@ -4,50 +4,49 @@
 
 #include <fstream>
 #include <cstdlib>
+#include <QString>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QVariant>
+#include <QDir>
 
 using namespace std;
 
+
 ScientistRepository::ScientistRepository()
 {
-    fileName = constants::DATA_FILE_NAME;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = QString::fromStdString(constants::DATABASE_NAME);
+    db.setDatabaseName(dbName);
 }
 
 std::vector<Scientist> ScientistRepository::getAllScientists()
 {
-    ifstream file;
-
-    file.open(fileName.c_str());
-
     vector<Scientist> scientists;
 
-    if (file.is_open())
+    if (db.open())
     {
-        string line;
-        while(getline(file, line))
+        QSqlQuery query("SELECT Name, Gender, YearBorn, YearDied FROM scientists", db);
+
+        while (query.next())
         {
-            vector<string> fields = utils::splitString(line, constants::FILE_DELIMETER);
+            std::string name = query.value(0).toString().toStdString();
+            enum genderType gender = utils::stringToGender(query.value(1).toString().toStdString());
+            int yearBorn = query.value(2).toInt();
+            int yearDied = query.value(3).toInt();
 
-            if (fields.size() >= 3)
+            if (!yearDied)
             {
-                string name = fields.at(0);
-                enum genderType gender = utils::stringToGender(fields.at(1));
-                int yearBorn = utils::stringToInt(fields.at(2));
-
-                if (fields.size() == 3)
-                {
-                    scientists.push_back(Scientist(name, gender, yearBorn));
-                }
-                else
-                {
-                    int yearDied = utils::stringToInt(fields.at(3));
-
-                    scientists.push_back(Scientist(name, gender, yearBorn, yearDied));
-                }
+                scientists.push_back(Scientist(name, gender, yearBorn));
+            }
+            else
+            {
+                scientists.push_back(Scientist(name, gender, yearBorn, yearDied));
             }
         }
     }
 
-    file.close();
+    db.close();
 
     return scientists;
 }
