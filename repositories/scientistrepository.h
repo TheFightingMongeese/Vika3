@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <QSqlDatabase>
 
 #include "models/scientist.h"
 
@@ -36,6 +37,7 @@ public:
     bool addScientist(Scientist scientist);
 
 private:
+    QSqlDatabase db;
     std::string fileName;
 };
 
