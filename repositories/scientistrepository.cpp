@@ -69,33 +69,31 @@ vector<Scientist> ScientistRepository::searchForScientists(string searchTerm)
 
 bool ScientistRepository::addScientist(Scientist scientist)
 {
-    ofstream file;
-
-    file.open(fileName.c_str(), std::ios::app);
-
-    if (file.is_open())
+    if (db.open())
     {
         string name = scientist.getName();
         enum genderType gender = scientist.getGender();
         int yearBorn = scientist.getYearBorn();
         int yearDied = scientist.getYearDied();
 
-        file << name << constants::FILE_DELIMETER
-             << gender << constants::FILE_DELIMETER
-             << yearBorn << constants::FILE_DELIMETER;
+        QSqlQuery query;
+
+        query.prepare("INSERT INTO scientists (name, gender, yearBorn, yearDied) VALUES (:name, :gender, :yearBorn, :yearDied)");
+        query.bindValue(":name", QString::fromStdString(name));
+        query.bindValue(":gender", gender);
+        query.bindValue(":yearBorn", yearBorn);
 
         if (yearDied != constants::YEAR_DIED_DEFAULT_VALUE)
         {
-            file << yearDied;
+            query.bindValue(":yearDied", yearDied);
         }
-
-        file << '\n';
+        return query.exec();
     }
     else
     {
         return false;
     }
 
-    file.close();
+    db.close();
     return true;
 }
