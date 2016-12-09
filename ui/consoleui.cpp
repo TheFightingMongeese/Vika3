@@ -453,7 +453,7 @@ void ConsoleUI::displayComputers(std::vector<Computer> computers)
     cout << "Printing all computers:\n";
 
     cout << setw(20) << std::left << "Name:"
-         << setw(8) << std::left << "Type:"
+         << setw(20) << std::left << "Type:"
          << setw(12) << std::left << "Year of build:" << endl;
 
     for (unsigned int i = 0; i < computers.size(); i++)
@@ -480,7 +480,7 @@ void ConsoleUI::displayComputers(std::vector<Computer> computers)
         string built = (yearOfBuild == constants::YEAR_OF_BUILD_DEFAULT_VALUE) ? "Not built" : utils::intToString(yearOfBuild);
 
         cout << setw(20) << std::left << computers.at(i).getName()
-             << setw(8) << std::left << type
+             << setw(20) << std::left << type
              << setw(12) << std::left << built << endl;
     }
 }
