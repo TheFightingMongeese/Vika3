@@ -3,10 +3,10 @@
 
 #include "models/computer.h"
 
-class computercomparator
+class ComputerComparator
 {
 public:
-    computercomparator(std::string sortColumn, bool sortInAscendingOrder);
+    ComputerComparator(std::string sortColumn, bool sortInAscendingOrder);
 
     bool operator() (const Computer& first, const Computer& second);
 private:
