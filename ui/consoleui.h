@@ -20,6 +20,8 @@ enum command {
     displayAllScientists,
     search,
     connect,
+    searchComputer,
+    searchScientist,
     sort,
     sortScientist,
     sortComputer,
@@ -56,6 +58,7 @@ private:
     void displayAllComputers();
     void displayScientistSearchMenu();
     void displayComputerSearchMenu();
+
     void displayScientistSortMenu();
     void displayComputerSortMenu();
     void displayConnect();
@@ -79,13 +82,13 @@ private:
      * @param userInput the input the user is trying to change sort from
      */
     void sortCommandHandler(std::string userInput);
-
+    void sortComputerCommandHandler(std::string UserInput);
     /**
      * @brief searchCommandHandler calls the scientistService displays a list of filtered users
      * @param userInput a string sent as input to the search function
      */
     void searchCommandHandler(std::string userInput);
-
+    void searchComputerCommandHandler(std::string userInput);
     /**
      * @brief addScientist attempts to add a scientist
      * @param data A string containing the user input
@@ -101,7 +104,7 @@ private:
      * @return true if it was a success, false if it was a failure
      */
     bool setSort(std::string sortCommand);
-
+    bool setComputerSort(std::string sortCommand);
     void displayError(std::string error);
 
     ScientistService scientistService;

@@ -49,13 +49,22 @@ void ConsoleUI::display()
             displayAllComputers();
             break;
         case command::search:
-            displayScientistSearchMenu();
+            displayChooseModelMenu();
             break;
         case command::sortScientist:
             displayScientistSortMenu();
             break;
         case command::connect:
             displayConnect();
+            break;
+        case command::sortComputer:
+            displayComputerSortMenu();
+            break;
+        case command::searchComputer:
+            displayComputerSearchMenu();
+            break;
+        case command::searchScientist:
+            displayScientistSearchMenu();
             break;
         default:
             displayUnknownCommandMenu();
@@ -79,27 +88,27 @@ void ConsoleUI::readInput()
     bool shouldTreatInputAsCommand = (lastCommand != command::search);
 
     // Level 1 commands
-    if (userInput == "display" && shouldTreatInputAsCommand)
+    if (userInput == "d" && shouldTreatInputAsCommand) //display
     {
         lastCommand = command::sort;
     }
-    else if (userInput == "add" && shouldTreatInputAsCommand)
+    else if (userInput == "a" && shouldTreatInputAsCommand) //add
     {
         lastCommand = command::add;
     }
-    else if (userInput == "search" && shouldTreatInputAsCommand)
+    else if (userInput == "s" && shouldTreatInputAsCommand) //search
     {
         lastCommand = command::search;
     }
-    else if (userInput == "connect" && shouldTreatInputAsCommand)
+    else if (userInput == "c" && shouldTreatInputAsCommand)
     {
         lastCommand = command::connect;
     }
-    else if (userInput == "back")
+    else if (userInput == "b") //back
     {
         lastCommand = command::menu;
     }
-    else if (userInput == "quit")
+    else if (userInput == "q") //quit
     {
         lastCommand = command::quit;
     }
@@ -116,10 +125,24 @@ void ConsoleUI::readInput()
     {
         lastCommand = command::sortScientist;
     }
-    else if(lastCommand == command::sort && userInput == "computer")
+    else if (lastCommand == command::sort && userInput == "computer")
+    {
+        lastCommand = command::sortComputer;
+    }
+    else if (lastCommand == command::search && userInput == "computer")
+    {
+        lastCommand = command::searchComputer;
+
+    }
+    else if(lastCommand == command::search && userInput == "scientist")
+    {
+        lastCommand = command::searchScientist;
+
+    }
+    /*else if(lastCommand == command::sort && userInput == "computer")
     {
         lastCommand = command::displayAllComputers;
-    }
+    }*/
     else
     {
         // User input
@@ -137,15 +160,19 @@ void ConsoleUI::readInput()
         }
         else if (lastCommand == command::sortComputer)
         {
-            sortCommandHandler(userInput);
+            sortComputerCommandHandler(userInput);
         }
-        else if (lastCommand == command::search)
+        else if (lastCommand == command::searchScientist)
         {
             searchCommandHandler(userInput);
         }
         else if (lastCommand == command::connect)
         {
             addConnectionCommandHandler(userInput);
+        }
+        else if (lastCommand == command::searchComputer)
+        {
+            searchComputerCommandHandler(userInput);
         }
         else
         {
@@ -154,7 +181,6 @@ void ConsoleUI::readInput()
     }
 }
 
-//TODO
 void ConsoleUI::addComputerCommandHandler(string userInput)
 {
     enum addStatus status = addComputer(userInput);
@@ -238,34 +264,45 @@ void ConsoleUI::sortCommandHandler(string userInput)
     }
 }
 
+void ConsoleUI::sortComputerCommandHandler(string userInput)
+{
+    if (setComputerSort(userInput))
+    {
+        lastCommand = command::displayAllComputers;
+    }
+    else
+    {
+        displayError("Your input did not match any of the sort commands");
+    }
+}
+
 void ConsoleUI::searchCommandHandler(string userInput)
 {
     displayScientists(scientistService.searchForScientists(userInput));
+}
+
+void ConsoleUI::searchComputerCommandHandler(string userInput)
+{
+    displayComputers(computerService.searchForComputers(userInput));
 }
 
 void ConsoleUI::displayMenu()
 {
     cout << "Enter a command:\n\n";
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "add:" << "Adds a scientist or a computer\n";
+         << "a:" << "Adds a scientist or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "display:" << "Displays scientists\n";
+         << "d:" << "Displays scientists or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "search:" << "Search for a scientist\n";
+         << "s:" << "Search for a scientist or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "display computers:" << "Displays computers\n";
+         << "c:" << "Connect computer to a scientist\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "search computers:" << "Search for a computer\n";
-
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "connect:" << "Connect computer to a scientist\n";
-
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "quit:" << "Quits the program\n\n";
+         << "q:" << "Quits the program\n\n";
 
     cout << "Command: ";
 }
@@ -275,7 +312,7 @@ void ConsoleUI::displayChooseModelMenu()
     cout << "Please choose a model:\n\n"
          << "computer\n"
          << "scientist\n\n";
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Command: ";
 }
 
@@ -285,7 +322,7 @@ void ConsoleUI::displayAddComputerMenu()
     cout << "To add a computer, type in:\n";
     cout << "Name, type, year of build (optional)\n";
     cout << "Comma separated like in the example above.\n\n";
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -294,7 +331,7 @@ void ConsoleUI::displayAddScientistMenu()
     cout << "To add a scientist, type in:\n";
     cout << "Name,gender,yearBorn,yearDied (optional)\n";
     cout << "Comma separated like in the example above.\n\n";
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -308,6 +345,7 @@ void ConsoleUI::displayAllScientists()
 
     lastCommand = command::display;
 }
+
 void ConsoleUI::displayAllComputers()
 {
     vector<Computer> computers = computerService.getAllComputers(sortBy, sortAscending);
@@ -323,7 +361,7 @@ void ConsoleUI::displayScientistSearchMenu()
 {
     cout << "Search for a scientist.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -348,7 +386,7 @@ void ConsoleUI::displayScientistSortMenu()
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_DIED_DESCENDING << "Sorts by year died, descending.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
 
     cout << "Command: ";
 }
@@ -367,7 +405,7 @@ void ConsoleUI::displayComputerSearchMenu()
 {
     cout << "Search for a computer.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -392,7 +430,7 @@ void ConsoleUI::displayComputerSortMenu()
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_TYPE_DESCENDING << "Sorts by type, descending.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
 
     cout << "Command: ";
 }
@@ -431,7 +469,7 @@ void ConsoleUI::displayScientists(std::vector<Scientist> scientists)
              << setw(12) << std::left << died << endl;
     }
 }
-//TODO
+
 void ConsoleUI::displayComputers(std::vector<Computer> computers)
 {
     if (computers.size() == 0)
@@ -443,18 +481,34 @@ void ConsoleUI::displayComputers(std::vector<Computer> computers)
     cout << "Printing all computers:\n";
 
     cout << setw(20) << std::left << "Name:"
-         << setw(8) << std::left << "Type:"
+         << setw(20) << std::left << "Type:"
          << setw(12) << std::left << "Year of build:" << endl;
 
     for (unsigned int i = 0; i < computers.size(); i++)
     {
-        string type = (computers.at(i).getType() == computerType::electronic) ? "Electronic" : "Other";
+        string type;
+        if(computers.at(i).getType() == computerType::electronic)
+        {
+            type = "Electronic";
+        }
+        else if(computers.at(i).getType() == computerType::mechanical)
+        {
+            type = "Mechanical";
+        }
+        else if(computers.at(i).getType() == computerType::electromechanical)
+        {
+            type = "Electro-Mechanical";
+        }
+        else
+        {
+            type = "Other";
+        }
 
         int yearOfBuild = computers.at(i).getYearOfBuild();
         string built = (yearOfBuild == constants::YEAR_OF_BUILD_DEFAULT_VALUE) ? "Not built" : utils::intToString(yearOfBuild);
 
         cout << setw(20) << std::left << computers.at(i).getName()
-             << setw(8) << std::left << type
+             << setw(20) << std::left << type
              << setw(12) << std::left << built << endl;
     }
 }
@@ -531,21 +585,9 @@ enum addStatus ConsoleUI::addComputer(string data)
         {
             type = computerType::mechanical;
         }
-        else if(fields.at(1) == "analog")
+        else if(fields.at(1) == "electromechanical")
         {
-            type = computerType::analog;
-        }
-        else if(fields.at(1) == "digital")
-        {
-            type = computerType::digital;
-        }
-        else if(fields.at(1) == "transistor")
-        {
-            type = computerType::transistor;
-        }
-        else if(fields.at(1) == "integratedCirquit")
-        {
-            type = computerType::integratedCircuit;
+            type = computerType::electromechanical;
         }
 
         if (fields.size() == 2)
@@ -601,9 +643,48 @@ bool ConsoleUI::setSort(string sortCommand)
 
     return true;
 }
+bool ConsoleUI::setComputerSort(string sortCommand)
+{
+    if (sortCommand == constants::SORT_COMPUTER_NAME_ASCENDING)
+    {
+        sortBy = "name";
+        sortAscending = true;
+    }
+    else if (sortCommand == constants::SORT_COMPUTER_NAME_DESCENDING)
+    {
+        sortBy = "name";
+        sortAscending = false;
+    }
+    else if (sortCommand == constants::SORT_COMPUTER_YEAR_OF_BUILD_ASCENDING)
+    {
+        sortBy = "yearofBuild";
+        sortAscending = true;
+    }
+    else if (sortCommand == constants::SORT_COMPUTER_YEAR_OF_BUILD_DESCENDING)
+    {
+        sortBy = "yearofBuild";
+        sortAscending = false;
+    }
+    else if (sortCommand == constants::SORT_COMPUTER_TYPE_ASCENDING)
+    {
+        sortBy = "type";
+        sortAscending = true;
+    }
+    else if (sortCommand == constants::SORT_COMPUTER_TYPE_DESCENDING)
+    {
+        sortBy = "type";
+        sortAscending = false;
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
+}
 
 void ConsoleUI::displayError(string error)
 {
     cout << "There was an error: " << error << "\n";
-    cout << "Please try again or type 'back' to go back.\n\n";
+    cout << "Please try again or type 'b' to go back.\n\n";
 }
