@@ -644,5 +644,5 @@ bool ConsoleUI::setComputerSort(string sortCommand)
 void ConsoleUI::displayError(string error)
 {
     cout << "There was an error: " << error << "\n";
-    cout << "Please try again or type 'back' to go b.\n\n";
+    cout << "Please try again or type 'b' to go back.\n\n";
 }
