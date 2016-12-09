@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     services/scientistservice.cpp \
     ui/consoleui.cpp \
     utilities/utils.cpp \
-    utilities/scientistcomparator.cpp
+    utilities/scientistcomparator.cpp \
+    models/computer.cpp
 
 HEADERS += \
     models/scientist.h \
@@ -25,7 +26,8 @@ HEADERS += \
     services/scientistservice.h \
     ui/consoleui.h \
     utilities/scientistcomparator.h \
-    utilities/enums.h
+    utilities/enums.h \
+    models/computer.h
 
 DISTFILES += \
     scientists.sqlite

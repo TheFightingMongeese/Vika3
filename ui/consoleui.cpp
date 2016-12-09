@@ -2,6 +2,7 @@
 #include "utilities/constants.h"
 #include "utilities/utils.h"
 
+
 #include <iostream>
 #include <iomanip>
 
@@ -29,7 +30,7 @@ void ConsoleUI::display()
 {
     switch (lastCommand)
     {
-        case command::menu:
+       case command::menu:
             displayMenu();
             break;
         case command::add:
