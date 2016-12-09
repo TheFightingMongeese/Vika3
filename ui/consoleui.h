@@ -19,6 +19,8 @@ enum command {
     displayAllComputers,
     displayAllScientists,
     search,
+    searchComputer,
+    searchScientist,
     sort,
     sortScientist,
     sortComputer,
@@ -55,6 +57,7 @@ private:
     void displayAllComputers();
     void displayScientistSearchMenu();
     void displayComputerSearchMenu();
+
     void displayScientistSortMenu();
     void displayComputerSortMenu();
     void displayUnknownCommandMenu();
@@ -82,7 +85,7 @@ private:
      * @param userInput a string sent as input to the search function
      */
     void searchCommandHandler(std::string userInput);
-
+    void searchComputerCommandHandler(std::string userInput);
     /**
      * @brief addScientist attempts to add a scientist
      * @param data A string containing the user input

@@ -49,13 +49,19 @@ void ConsoleUI::display()
             displayAllComputers();
             break;
         case command::search:
-            displayScientistSearchMenu();
+            displayChooseModelMenu();
             break;
         case command::sortScientist:
             displayScientistSortMenu();
             break;
         case command::sortComputer:
             displayComputerSortMenu();
+            break;
+        case command::searchComputer:
+            displayComputerSearchMenu();
+            break;
+        case command::searchScientist:
+            displayScientistSearchMenu();
             break;
         default:
             displayUnknownCommandMenu();
@@ -116,6 +122,16 @@ void ConsoleUI::readInput()
     {
         lastCommand = command::sortComputer;
     }
+    else if (lastCommand == command::search && userInput == "computer")
+    {
+        lastCommand = command::searchComputer;
+
+    }
+    else if(lastCommand == command::search && userInput == "scientist")
+    {
+        lastCommand = command::searchScientist;
+
+    }
     /*else if(lastCommand == command::sort && userInput == "computer")
     {
         lastCommand = command::displayAllComputers;
@@ -139,10 +155,18 @@ void ConsoleUI::readInput()
         {
             sortComputerCommandHandler(userInput);
         }
-        else if (lastCommand == command::search)
+        else if (lastCommand == command::searchScientist)
         {
             searchCommandHandler(userInput);
         }
+        else if (lastCommand == command::searchComputer)
+        {
+            searchComputerCommandHandler(userInput);
+        }
+        /*else if (lastCommand == command::search)
+        {
+            searchCommandHandler(userInput);
+        }*/
         else
         {
             lastCommand = command::unknown;
@@ -236,6 +260,11 @@ void ConsoleUI::searchCommandHandler(string userInput)
 {
     displayScientists(scientistService.searchForScientists(userInput));
 }
+void ConsoleUI::searchComputerCommandHandler(string userInput)
+{
+    displayComputers(computerService.searchForComputers(userInput));
+}
+
 
 void ConsoleUI::displayMenu()
 {
