@@ -20,6 +20,16 @@ Scientist::Scientist(string name, enum genderType gender, int yearBorn, int year
     _yearDied = yearDied;
 }
 
+void Scientist::setID(int id)
+{
+    _id = id;
+}
+
+int Scientist::getID() const
+{
+    return _id;
+}
+
 std::string Scientist::getName() const
 {
     return _name;
