@@ -85,23 +85,23 @@ void ConsoleUI::readInput()
     bool shouldTreatInputAsCommand = (lastCommand != command::search);
 
     // Level 1 commands
-    if (userInput == "display" && shouldTreatInputAsCommand)
+    if (userInput == "d" && shouldTreatInputAsCommand) //display
     {
         lastCommand = command::sort;
     }
-    else if (userInput == "add" && shouldTreatInputAsCommand)
+    else if (userInput == "a" && shouldTreatInputAsCommand) //add
     {
         lastCommand = command::add;
     }
-    else if (userInput == "search" && shouldTreatInputAsCommand)
+    else if (userInput == "s" && shouldTreatInputAsCommand) //search
     {
         lastCommand = command::search;
     }
-    else if (userInput == "back")
+    else if (userInput == "b") //back
     {
         lastCommand = command::menu;
     }
-    else if (userInput == "quit")
+    else if (userInput == "q") //quit
     {
         lastCommand = command::quit;
     }
@@ -270,13 +270,13 @@ void ConsoleUI::displayMenu()
 {
     cout << "Enter a command:\n\n";
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "add:" << "Adds a scientist or a computer\n";
+         << "a:" << "Adds a scientist or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "display:" << "Displays scientists or a computer\n";
+         << "d:" << "Displays scientists or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "search:" << "Search for a scientist or a computer\n";
+         << "s:" << "Search for a scientist or a computer\n";
 
    /* cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << "display computers:" << "Displays computers\n";
@@ -286,7 +286,7 @@ void ConsoleUI::displayMenu()
 
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "quit:" << "Quits the program\n\n";
+         << "q:" << "Quits the program\n\n";
 
     cout << "Command: ";
 }
@@ -296,7 +296,7 @@ void ConsoleUI::displayChooseModelMenu()
     cout << "Please choose a model:\n\n"
          << "computer\n"
          << "scientist\n\n";
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Command: ";
 }
 
@@ -306,7 +306,7 @@ void ConsoleUI::displayAddComputerMenu()
     cout << "To add a computer, type in:\n";
     cout << "Name, type, year of build (optional)\n";
     cout << "Comma separated like in the example above.\n\n";
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -315,7 +315,7 @@ void ConsoleUI::displayAddScientistMenu()
     cout << "To add a scientist, type in:\n";
     cout << "Name,gender,yearBorn,yearDied (optional)\n";
     cout << "Comma separated like in the example above.\n\n";
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -344,7 +344,7 @@ void ConsoleUI::displayScientistSearchMenu()
 {
     cout << "Search for a scientist.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -369,7 +369,7 @@ void ConsoleUI::displayScientistSortMenu()
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_DIED_DESCENDING << "Sorts by year died, descending.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
 
     cout << "Command: ";
 }
@@ -377,7 +377,7 @@ void ConsoleUI::displayComputerSearchMenu()
 {
     cout << "Search for a computer.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
     cout << "Input: ";
 }
 
@@ -402,7 +402,7 @@ void ConsoleUI::displayComputerSortMenu()
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_TYPE_DESCENDING << "Sorts by type, descending.\n\n";
 
-    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "If you would like to go back to the main menu, please type: b\n";
 
     cout << "Command: ";
 }
@@ -644,5 +644,5 @@ bool ConsoleUI::setComputerSort(string sortCommand)
 void ConsoleUI::displayError(string error)
 {
     cout << "There was an error: " << error << "\n";
-    cout << "Please try again or type 'back' to go back.\n\n";
+    cout << "Please try again or type 'back' to go b.\n\n";
 }
