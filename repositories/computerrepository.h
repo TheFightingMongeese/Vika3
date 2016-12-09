@@ -16,7 +16,6 @@ public:
 
     std::vector<Computer> getAllComputers();
 
-
     std::vector<Computer> searchForComputers(std::string searchTerm);
 
     bool addComputer(Computer computer);

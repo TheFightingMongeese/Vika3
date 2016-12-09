@@ -16,7 +16,7 @@ ConsoleUI::ConsoleUI()
 
 int ConsoleUI::start()
 {
-    while(lastCommand != command::quit)
+    while (lastCommand != command::quit)
     {
         display();
         readInput();
@@ -139,10 +139,6 @@ void ConsoleUI::readInput()
         lastCommand = command::searchScientist;
 
     }
-    /*else if(lastCommand == command::sort && userInput == "computer")
-    {
-        lastCommand = command::displayAllComputers;
-    }*/
     else
     {
         // User input
@@ -318,7 +314,6 @@ void ConsoleUI::displayChooseModelMenu()
 
 void ConsoleUI::displayAddComputerMenu()
 {
-    //TODO
     cout << "To add a computer, type in:\n";
     cout << "Name, type, year of build (optional)\n";
     cout << "Comma separated like in the example above.\n\n";
