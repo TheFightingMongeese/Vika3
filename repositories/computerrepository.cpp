@@ -15,18 +15,15 @@ using namespace std;
 
 ComputerRepository::ComputerRepository()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = QString::fromStdString(constants::DATABASE_NAME);
-    db.setDatabaseName(dbName);
 }
 
 std::vector<Computer> ComputerRepository::getAllComputers()
 {
     vector<Computer> computers;
 
-    if (db.open())
+    if (db.connect())
     {
-        QSqlQuery query("SELECT Name, Type, YearOfBuild, Built FROM computers", db);
+        QSqlQuery query("SELECT Name, Type, YearOfBuild, Built FROM computers");
 
         while (query.next())
         {
@@ -68,7 +65,8 @@ vector<Computer> ComputerRepository::searchForComputers(string searchTerm)
 
 bool ComputerRepository::addComputer(Computer computer)
 {
-    if (db.open())
+    bool success = true;
+    if (db.connect())
     {
         string name = computer.getName();
         enum computerType type = computer.getType();
@@ -76,7 +74,7 @@ bool ComputerRepository::addComputer(Computer computer)
 
         QSqlQuery query;
 
-        query.prepare("INSERT INTO computers (Name, Type, YearOfBuild, Built) VALUES (:name, :type, :YearOfBuild, :Built)");
+        query.prepare("INSERT INTO computers (Name, ComputerType, YearOfBuild) VALUES (:name, :type, :YearOfBuild)");
         query.bindValue(":name", QString::fromStdString(name));
         query.bindValue(":type", type);
 
@@ -84,13 +82,15 @@ bool ComputerRepository::addComputer(Computer computer)
         {
             query.bindValue(":YearOfBuild", yearOfBuild);
         }
-        return query.exec();
-    }
-    else
-    {
-        return false;
+
+        success = query.exec();
+
+        if (!success)
+        {
+            qDebug() << "\nInsert computer error: " << query.lastError();
+        }
     }
 
     db.close();
-    return true;
+    return success;
 }
