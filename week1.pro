@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     utilities/scientistcomparator.cpp \
     models/computer.cpp \
     repositories/computerrepository.cpp \
-    utilities/computercomparator.cpp
+    utilities/computercomparator.cpp \
+    db/database.cpp
 
 HEADERS += \
     models/scientist.h \
@@ -32,7 +33,8 @@ HEADERS += \
     repositories/scientistrepository.h \
     services/computerservice.h \
     models/computer.h \
-    utilities/computercomparator.h
+    utilities/computercomparator.h \
+    db/database.h
 
 DISTFILES += \
     scientists.sqlite
