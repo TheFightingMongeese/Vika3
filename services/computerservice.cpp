@@ -14,7 +14,7 @@ std::vector<Computer> ComputerService::getAllComputers(std::string orderBy, bool
 {
     vector<Computer> Computers = computerRepo.getAllComputers();
 
-    std::sort(Computers.begin(), Computers.end(), ComputerComparator(orderBy, orderAscending));
+    std::sort(Computers.begin(), Computers.end(), computercomparator(orderBy, orderAscending));
 
     return Computers;
 }
