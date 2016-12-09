@@ -19,6 +19,7 @@ SOURCES += main.cpp \
     models/computer.cpp \
     repositories/computerrepository.cpp \
     utilities/computercomparator.cpp \
+    services/computerservice.cpp \
     db/database.cpp
 
 HEADERS += \

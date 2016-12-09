@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "computerservice.h"
+=======
+#include "services/computerservice.h"
+>>>>>>> c1adfcc5ff4aac20c4f3fb1d0e5d6ed8dca224cb
 #include "utilities/computercomparator.h"
 #include "utilities/constants.h"
 
@@ -6,19 +10,18 @@
 
 using namespace std;
 
-
-Computerservice::Computerservice()
+ComputerService::ComputerService()
 {
-
 }
 
 std::vector<Computer> ComputerService::getAllComputers(std::string orderBy, bool orderAscending)
 {
-    vector<Computer> computer = computerRepo.getAllComputers();
 
-    std::sort(computer.begin(), computer.end(), ComputerComparator(orderBy, orderAscending));
+    vector<Computer> Computers = computerRepo.getAllComputers();
 
-    return computers;
+    std::sort(Computers.begin(), Computers.end(), ComputerComparator(orderBy, orderAscending));
+
+    return Computers;
 }
 
 std::vector<Computer> ComputerService::searchForComputers(std::string searchTerm)
@@ -26,22 +29,13 @@ std::vector<Computer> ComputerService::searchForComputers(std::string searchTerm
     return computerRepo.searchForComputers(searchTerm);
 }
 
-
-string addStatus ComputerService::addComputer(Computer computer)
+enum addStatus ComputerService::addComputer(Computer computer)
 {
     // Validate the input:
 
     if (computer.getName() == "")
     {
-        return "Missing name";
-    }
-    else if (computer.getType() == "")
-    {
-        return "Missing Type";
-    }
-    else if (computer.getYearDesign() == "")
-    {
-        return "Not built";
+        return addStatus::nameMissing;
     }
 
     // Validation complete. Ask the data layer to store the
@@ -50,9 +44,8 @@ string addStatus ComputerService::addComputer(Computer computer)
 
     if (result == false)
     {
-        return "Failed to add";
+        return addStatus::generalFailure;
     }
 
-    return "Success!";
+    return addStatus::success;
 }
-
