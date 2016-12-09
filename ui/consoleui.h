@@ -19,6 +19,7 @@ enum command {
     displayAllComputers,
     displayAllScientists,
     search,
+    connect,
     sort,
     sortScientist,
     sortComputer,
@@ -57,6 +58,7 @@ private:
     void displayComputerSearchMenu();
     void displayScientistSortMenu();
     void displayComputerSortMenu();
+    void displayConnect();
     void displayUnknownCommandMenu();
     void displayScientists(std::vector<Scientist> scientists);
     void displayComputers(std::vector<Computer> computers);
@@ -70,6 +72,7 @@ private:
      */
     void addScientistCommandHandler(std::string userInput);
     void addComputerCommandHandler(std::string userInput);
+    void addConnectionCommandHandler(std::string userInput);
 
     /**
      * @brief sortCommandHandler calls the setSort function and notifies the user how it went
@@ -90,6 +93,7 @@ private:
      */
     enum addStatus addScientist(std::string data);
     enum addStatus addComputer(std::string data);
+    bool addConnection(std::string data);
 
     /**
      * @brief setSort attempts to change how scientists will be sorted based on userinput

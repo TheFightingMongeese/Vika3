@@ -54,6 +54,9 @@ void ConsoleUI::display()
         case command::sortScientist:
             displayScientistSortMenu();
             break;
+        case command::connect:
+            displayConnect();
+            break;
         default:
             displayUnknownCommandMenu();
             break;
@@ -87,6 +90,10 @@ void ConsoleUI::readInput()
     else if (userInput == "search" && shouldTreatInputAsCommand)
     {
         lastCommand = command::search;
+    }
+    else if (userInput == "connect" && shouldTreatInputAsCommand)
+    {
+        lastCommand = command::connect;
     }
     else if (userInput == "back")
     {
@@ -136,6 +143,10 @@ void ConsoleUI::readInput()
         {
             searchCommandHandler(userInput);
         }
+        else if (lastCommand == command::connect)
+        {
+            addConnectionCommandHandler(userInput);
+        }
         else
         {
             lastCommand = command::unknown;
@@ -174,7 +185,8 @@ void ConsoleUI::addComputerCommandHandler(string userInput)
 void ConsoleUI::addScientistCommandHandler(string userInput)
 {
     enum addStatus status = addScientist(userInput);
-    if ( status == addStatus::success) {
+    if (status == addStatus::success)
+    {
         cout << "Successfully added a scientist\n\n";
         lastCommand = command::menu;
     }
@@ -198,6 +210,19 @@ void ConsoleUI::addScientistCommandHandler(string userInput)
             cout << "There was an error adding the scientist. Sorry for that :/" << endl;
             break;
         }
+    }
+}
+
+void ConsoleUI::addConnectionCommandHandler(string userInput)
+{
+    if (addConnection(userInput))
+    {
+        cout << "Successfully added a connection\n\n";
+        lastCommand = command::menu;
+    }
+    else
+    {
+        cout << "There was an error adding the connection. Sorry for that :/" << endl;
     }
 }
 
@@ -236,6 +261,8 @@ void ConsoleUI::displayMenu()
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << "search computers:" << "Search for a computer\n";
 
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << "connect:" << "Connect computer to a scientist\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << "quit:" << "Quits the program\n\n";
@@ -325,6 +352,17 @@ void ConsoleUI::displayScientistSortMenu()
 
     cout << "Command: ";
 }
+
+void ConsoleUI::displayConnect()
+{
+    cout << "Connect computer to a scientist.\n\n";
+    cout << "Please write the ID of the computer and the ID of the scientist.\n";
+    cout << "Computer ID,Scientist ID\n";
+    cout << "Comma separated like in the example above.\n\n";
+    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "Input: ";
+}
+
 void ConsoleUI::displayComputerSearchMenu()
 {
     cout << "Search for a computer.\n\n";
@@ -458,6 +496,20 @@ enum addStatus ConsoleUI::addScientist(string data)
     }
 
     return addStatus::invalidInput;
+}
+
+bool ConsoleUI::addConnection(string data)
+{
+    vector<string> fields = utils::splitString(data, ',');
+
+    if (fields.size() == 2)
+    {
+        int computerID = utils::stringToInt(fields.at(0));
+        int scientistID = utils::stringToInt(fields.at(1));
+        return scientistService.connectComputer(scientistID, computerID);
+    }
+
+    return false;
 }
 
 enum addStatus ConsoleUI::addComputer(string data)
