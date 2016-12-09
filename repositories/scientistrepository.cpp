@@ -15,18 +15,15 @@ using namespace std;
 
 ScientistRepository::ScientistRepository()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = QString::fromStdString(constants::DATABASE_NAME);
-    db.setDatabaseName(dbName);
 }
 
 std::vector<Scientist> ScientistRepository::getAllScientists()
 {
     vector<Scientist> scientists;
 
-    if (db.open())
+    if (db.connect())
     {
-        QSqlQuery query("SELECT Name, Gender, YearBorn, YearDied FROM scientists", db);
+        QSqlQuery query("SELECT Name, Gender, YearBorn, YearDied FROM scientists");
 
         while (query.next())
         {
@@ -69,7 +66,7 @@ vector<Scientist> ScientistRepository::searchForScientists(string searchTerm)
 
 bool ScientistRepository::addScientist(Scientist scientist)
 {
-    if (db.open())
+    if (db.connect())
     {
         string name = scientist.getName();
         enum genderType gender = scientist.getGender();
