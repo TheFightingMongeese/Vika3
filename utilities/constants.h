@@ -11,6 +11,7 @@ namespace constants {
     const std::string DATABASE_NAME = "scientists.sqlite";
     const char FILE_DELIMETER = '\t';
     const int YEAR_DIED_DEFAULT_VALUE = 13337;
+    const int YEAR_OF_BUILD_DEFAULT_VALUE = 51994;
 
     const unsigned int MENU_COMMAND_WIDTH = 15;
 
