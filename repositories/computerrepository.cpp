@@ -23,7 +23,7 @@ std::vector<Computer> ComputerRepository::getAllComputers()
 
     if (db.connect())
     {
-        QSqlQuery query("SELECT Name, Type, YearOfBuild, Built FROM computers");
+        QSqlQuery query("SELECT Name, ComputerType, YearOfBuild FROM computers");
 
         while (query.next())
         {
