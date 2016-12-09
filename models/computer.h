@@ -2,22 +2,33 @@
 #define COMPUTER_H
 #include <string>
 
-class COMPUTER
+enum computerType {
+    mechanical,
+    electronic,
+};
+
+/**
+ * @brief The data model for computers
+ */
+class Computer
 {
 public:
-    COMPUTER(std::string name, int yearDesign);
-    COMPUTER(std::string name, int yearDesign,std::string type);
+    Computer(std::string name, computerType type);
+    Computer(std::string name, computerType type, int yearOfBuild);
 
     std::string getName() const;
-    //enum genderType getGender() const;
-    int getYearDesign() const;
-    std::string getType() const;
+    enum computerType getType() const;
+    int getYearOfBuild() const;
+    bool getBuilt() const;
 
     bool contains(std::string searchTerm);
 
 private:
     std::string _name;
-    std::string _Type;
-    int _YearDesign;
-    //int _yearDied;      setja bool hérna ?
+
+    enum computerType _type;
+    int _yearOfBuild;
+    int _built;
 };
+
+#endif // COMPUTER_H

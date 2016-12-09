@@ -81,4 +81,14 @@ namespace utils {
     {
         return intToGender(stringToInt(str));
     }
+
+    enum computerType intToType(int number)
+    {
+        return static_cast<enum computerType>(number);
+    }
+
+    enum computerType stringToType(std::string str)
+    {
+        return intToType(stringToInt(str));
+    }
 }
