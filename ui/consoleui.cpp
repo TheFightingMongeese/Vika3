@@ -225,16 +225,16 @@ void ConsoleUI::displayMenu()
          << "add:" << "Adds a scientist or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "display:" << "Displays scientists\n";
+         << "display:" << "Displays scientists or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "search:" << "Search for a scientist\n";
+         << "search:" << "Search for a scientist or a computer\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+   /* cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << "display computers:" << "Displays computers\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "search computers:" << "Search for a computer\n";
+         << "search computers:" << "Search for a computer\n";*/
 
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
