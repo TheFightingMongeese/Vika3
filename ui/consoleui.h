@@ -21,7 +21,7 @@ enum command {
     search,
     sort,
     sortScientist,
-    sortComptuer,
+    sortComputer,
     back,
     quit,
     unknown
