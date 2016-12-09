@@ -13,7 +13,7 @@ namespace constants {
     const int YEAR_DIED_DEFAULT_VALUE = 13337;
     const int YEAR_OF_BUILD_DEFAULT_VALUE = 51994;
 
-    const unsigned int MENU_COMMAND_WIDTH = 15;
+    const unsigned int MENU_COMMAND_WIDTH = 5;
 
     const std::string SORT_SCIENTIST_NAME_ASCENDING = "name-asc";
     const std::string SORT_SCIENTIST_NAME_DESCENDING = "name-desc";
