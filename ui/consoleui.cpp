@@ -576,17 +576,17 @@ enum addStatus ConsoleUI::addComputer(string data)
         string name = fields.at(0);
 
         computerType type;
-        if (fields.at(1) == "electronic")
-        {
-            type = computerType::electronic;
-        }
-        else if (fields.at(1) == "mechanical")
+        if (fields.at(1) == "mechanical")
         {
             type = computerType::mechanical;
         }
         else if(fields.at(1) == "electromechanical")
         {
             type = computerType::electromechanical;
+        }
+        else
+        {
+            type = computerType::electronic;
         }
 
         if (fields.size() == 2)
