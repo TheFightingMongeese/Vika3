@@ -1,0 +1,27 @@
+Computers
+
+Name,Year of Design,Designer,Type, Built(Y/N)
+		
+CNC,1939,George Stibitz,Electronic,Y
+
+Pascaline,1642,Blaise Pascal,Mechanical,Y
+
+Stepped Reckoner,1672,Gottfried Wilhelm Leibniz, Mechanical,Y
+
+Analytical Engine,1837,Charles Babbage, Mechanical,N
+
+Enigma Machine,1918,Alan Turing,Electro-Mechanical,Y
+
+Apple I,1976,Steve Wozniak,Electronic,Y
+
+Apple II,1977,Steve Wozniak,Electronic,Y
+
+Z3,1941,Konrad Zuse,Electronic,Y
+
+ABC,1939,John Vincent Atanasoff,Electronic,Y
+
+ 
+
+
+
+
