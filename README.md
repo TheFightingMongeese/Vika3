@@ -30,23 +30,23 @@ Athugið að misbrestir á forkröfum eða hópastarfi geta komið til frádrát
 
 Skila skal einni .zip / .rar skrá sem inniheldur allan kóða verkefnisins þannig að hægt sé að þýða og keyra verkefnið. Einnig skal fylgja með gagnaskrá með nokkrum færslum, bæði fyrir vísindamenn og tölvur, og tengingar þar á milli.
 
--------------------------------------------------------:)-------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 leiðbeiningar:
 ----------------------------------------------------------------------------------------------------------------
 Það þarf að færa database inn í build fileinn ef hann er ekki þar nú þegar.
 ----------------------------------------------------------------------------------------------------------------
 * **Add**
 Add a scientist or a computer to the database [Shortcut(a)]
-----------------------------------------------------------------------------------------------------------------
+
 * **Display**
 Display a scientist or a computer that's already in the database [Shortcut(d)]
-----------------------------------------------------------------------------------------------------------------
+
 * **Search**
 Searches for a scientist or a computer that's already in the database [Shortcut(s)]
-----------------------------------------------------------------------------------------------------------------
+
 * **Quit**
 Quits the program [Shortcut(q)]
-----------------------------------------------------------------------------------------------------------------
+
 * **Useful knowledge**
 to go back to main menu use [Shortcut(b)]
 
