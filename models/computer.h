@@ -1,5 +1,6 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
+
 #include <string>
 
 enum computerType {
@@ -25,7 +26,6 @@ public:
 
 private:
     std::string _name;
-
     enum computerType _type;
     int _yearOfBuild;
     int _built;

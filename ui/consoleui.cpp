@@ -2,7 +2,6 @@
 #include "utilities/constants.h"
 #include "utilities/utils.h"
 
-
 #include <iostream>
 #include <iomanip>
 
@@ -30,7 +29,7 @@ void ConsoleUI::display()
 {
     switch (lastCommand)
     {
-       case command::menu:
+        case command::menu:
             displayMenu();
             break;
         case command::add:
@@ -45,6 +44,9 @@ void ConsoleUI::display()
             break;
         case command::display:
             displayAllScientists();
+            break;
+        case command::displayAllComputers:
+            displayAllComputers();
             break;
         case command::search:
             displayScientistSearchMenu();
@@ -107,6 +109,10 @@ void ConsoleUI::readInput()
     {
         lastCommand = command::sortScientist;
     }
+    else if(lastCommand == command::sort && userInput == "computer")
+    {
+        lastCommand = command::displayAllComputers;
+    }
     else
     {
         // User input
@@ -119,6 +125,10 @@ void ConsoleUI::readInput()
             addComputerCommandHandler(userInput);
         }
         else if (lastCommand == command::sortScientist)
+        {
+            sortCommandHandler(userInput);
+        }
+        else if (lastCommand == command::sortComputer)
         {
             sortCommandHandler(userInput);
         }
@@ -271,7 +281,7 @@ void ConsoleUI::displayAllScientists()
 
     lastCommand = command::display;
 }
-/*void ConsoleUI::displayAllComputers()
+void ConsoleUI::displayAllComputers()
 {
     vector<Computer> computers = computerService.getAllComputers(sortBy, sortAscending);
 
@@ -280,7 +290,7 @@ void ConsoleUI::displayAllScientists()
     cout << '\n';
 
     lastCommand = command::display;
-}*/
+}
 
 void ConsoleUI::displayScientistSearchMenu()
 {

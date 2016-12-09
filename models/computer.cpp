@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 Computer::Computer(string name, enum computerType type)
 {
     _name = name;
