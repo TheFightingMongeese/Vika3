@@ -368,22 +368,22 @@ void ConsoleUI::displayScientistSearchMenu()
 void ConsoleUI::displayScientistSortMenu()
 {
     cout << "How should the list be sorted:\n\n";
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_NAME_ASCENDING << "Sorts by name, ascending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_NAME_DESCENDING << "Sorts by name, descending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_BORN_ASCENDING << "Sorts by year born, ascending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_BORN_DESCENDING << "Sorts by year born, descending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_DIED_ASCENDING << "Sorts by year died, ascending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_DIED_DESCENDING << "Sorts by year died, descending.\n\n";
 
     cout << "If you would like to go back to the main menu, please type: b\n";
@@ -412,22 +412,22 @@ void ConsoleUI::displayComputerSearchMenu()
 void ConsoleUI::displayComputerSortMenu()
 {
     cout << "How should the list be sorted:\n\n";
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_NAME_ASCENDING << "Sorts by name, ascending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_NAME_DESCENDING << "Sorts by name, descending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_YEAR_OF_BUILD_ASCENDING << "Sorts by year of build, ascending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_YEAR_OF_BUILD_DESCENDING << "Sorts by year of build, descending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_TYPE_ASCENDING << "Sorts by type, ascending.\n";
 
-    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+    cout << setw(constants::SORT_COMMAND_WIDTH) << std::left
          << constants::SORT_COMPUTER_TYPE_DESCENDING << "Sorts by type, descending.\n\n";
 
     cout << "If you would like to go back to the main menu, please type: b\n";
