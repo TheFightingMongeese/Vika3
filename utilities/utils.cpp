@@ -79,7 +79,7 @@ namespace utils {
 
     enum genderType stringToGender(std::string str)
     {
-        return intToGender(stringToInt(str));
+        return str=="Male" ? genderType::male : genderType::female;
     }
 
     enum computerType intToType(int number)
@@ -89,6 +89,12 @@ namespace utils {
 
     enum computerType stringToType(std::string str)
     {
-        return intToType(stringToInt(str));
+        if(str=="Mechanical")
+            return computerType::mechanical;
+        else if(str=="Electronic")
+            return computerType::electronic;
+        else if(str=="Electro-Mechanical")
+            return computerType::electromechanical;
+
     }
 }

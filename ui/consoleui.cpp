@@ -458,7 +458,23 @@ void ConsoleUI::displayComputers(std::vector<Computer> computers)
 
     for (unsigned int i = 0; i < computers.size(); i++)
     {
-        string type = (computers.at(i).getType() == computerType::electronic) ? "Electronic" : "Other";
+        string type;
+        if(computers.at(i).getType() == computerType::electronic)
+        {
+            type = "Electronic";
+        }
+        else if(computers.at(i).getType() == computerType::mechanical)
+        {
+            type = "Mechanical";
+        }
+        else if(computers.at(i).getType() == computerType::electromechanical)
+        {
+            type = "Electro-Mechanical";
+        }
+        else
+        {
+            type = "Other";
+        }
 
         int yearOfBuild = computers.at(i).getYearOfBuild();
         string built = (yearOfBuild == constants::YEAR_OF_BUILD_DEFAULT_VALUE) ? "Not built" : utils::intToString(yearOfBuild);
@@ -527,21 +543,9 @@ enum addStatus ConsoleUI::addComputer(string data)
         {
             type = computerType::mechanical;
         }
-        else if(fields.at(1) == "analog")
+        else if(fields.at(1) == "electromechanical")
         {
-            type = computerType::analog;
-        }
-        else if(fields.at(1) == "digital")
-        {
-            type = computerType::digital;
-        }
-        else if(fields.at(1) == "transistor")
-        {
-            type = computerType::transistor;
-        }
-        else if(fields.at(1) == "integratedCirquit")
-        {
-            type = computerType::integratedCircuit;
+            type = computerType::electromechanical;
         }
 
         if (fields.size() == 2)
