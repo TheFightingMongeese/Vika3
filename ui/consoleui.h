@@ -76,7 +76,7 @@ private:
      * @param userInput the input the user is trying to change sort from
      */
     void sortCommandHandler(std::string userInput);
-
+    void sortComputerCommandHandler(std::string UserInput);
     /**
      * @brief searchCommandHandler calls the scientistService displays a list of filtered users
      * @param userInput a string sent as input to the search function
@@ -97,7 +97,7 @@ private:
      * @return true if it was a success, false if it was a failure
      */
     bool setSort(std::string sortCommand);
-
+    bool setComputerSort(std::string sortCommand);
     void displayError(std::string error);
 
     ScientistService scientistService;
