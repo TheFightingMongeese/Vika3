@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <string>
-#include <QSqlDatabase>
 
+#include "db/database.h"
 #include "models/computer.h"
 
 
@@ -37,8 +37,7 @@ public:
     bool addComputer(Computer computer);
 
 private:
-    QSqlDatabase db;
-    std::string fileName;
+    Database db;
 };
 
 #endif // COMPUTERREPOSITORY_H

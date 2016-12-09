@@ -12,7 +12,6 @@ ConsoleUI::ConsoleUI()
     lastCommand = command::menu;
     sortBy = "name";
     sortAscending = true;
-    iukikhh
 }
 
 int ConsoleUI::start()
@@ -34,6 +33,13 @@ void ConsoleUI::display()
             displayMenu();
             break;
         case command::add:
+        case command::sort:
+            displayChooseModelMenu();
+            break;
+        case command::addComputer:
+            displayAddComputerMenu();
+            break;
+        case command::addScientist:
             displayAddScientistMenu();
             break;
         case command::display:
@@ -42,7 +48,7 @@ void ConsoleUI::display()
         case command::search:
             displayScientistSearchMenu();
             break;
-        case command::sort:
+        case command::sortScientist:
             displayScientistSortMenu();
             break;
         default:
@@ -66,6 +72,7 @@ void ConsoleUI::readInput()
 
     bool shouldTreatInputAsCommand = (lastCommand != command::search);
 
+    // Level 1 commands
     if (userInput == "display" && shouldTreatInputAsCommand)
     {
         lastCommand = command::sort;
@@ -86,13 +93,31 @@ void ConsoleUI::readInput()
     {
         lastCommand = command::quit;
     }
+    // Level 2 commands
+    else if (lastCommand == command::add && userInput == "computer")
+    {
+        lastCommand = command::addComputer;
+    }
+    else if (lastCommand == command::add && userInput == "scientist")
+    {
+        lastCommand = command::addScientist;
+    }
+    else if (lastCommand == command::sort && userInput == "scientist")
+    {
+        lastCommand = command::sortScientist;
+    }
     else
     {
-        if (lastCommand == command::add)
+        // User input
+        if (lastCommand == command::addScientist)
         {
-            addCommandHandler(userInput);
+            addScientistCommandHandler(userInput);
         }
-        else if (lastCommand == command::sort)
+        else if (lastCommand == command::addComputer)
+        {
+            addComputerCommandHandler(userInput);
+        }
+        else if (lastCommand == command::sortScientist)
         {
             sortCommandHandler(userInput);
         }
@@ -107,7 +132,35 @@ void ConsoleUI::readInput()
     }
 }
 
-void ConsoleUI::addCommandHandler(string userInput)
+//TODO
+void ConsoleUI::addComputerCommandHandler(string userInput)
+{
+    enum addStatus status = addComputer(userInput);
+    if (status == addStatus::success) {
+        cout << "Successfully added a computer\n\n";
+        lastCommand = command::menu;
+    }
+    else
+    {
+        switch(status)
+        {
+        case addStatus::nameMissing:
+            cout << "The name is required" << endl;
+            break;
+        case addStatus::computerTypeMissing:
+            cout << "You must specify the type of the computer" << endl;
+            break;
+        case addStatus::invalidInput:
+            cout << "Check your input - type in 2 or 3 values, separated by commas" << endl;
+            break;
+        default:
+            cout << "There was an error adding the computer. Sorry for that :/" << endl;
+            break;
+        }
+    }
+}
+
+void ConsoleUI::addScientistCommandHandler(string userInput)
 {
     enum addStatus status = addScientist(userInput);
     if ( status == addStatus::success) {
@@ -158,7 +211,7 @@ void ConsoleUI::displayMenu()
 {
     cout << "Enter a command:\n\n";
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
-         << "add:" << "Adds a scientist\n";
+         << "add:" << "Adds a scientist or a computer\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << "display:" << "Displays scientists\n";
@@ -167,9 +220,35 @@ void ConsoleUI::displayMenu()
          << "search:" << "Search for a scientist\n";
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << "display computers:" << "Displays computers\n";
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << "search computers:" << "Search for a computer\n";
+
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << "quit:" << "Quits the program\n\n";
 
     cout << "Command: ";
+}
+
+void ConsoleUI::displayChooseModelMenu()
+{
+    cout << "Please choose a model:\n\n"
+         << "computer\n"
+         << "scientist\n\n";
+    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "Command: ";
+}
+
+void ConsoleUI::displayAddComputerMenu()
+{
+    //TODO
+    cout << "To add a computer, type in:\n";
+    cout << "Name, type, year of build (optional)\n";
+    cout << "Comma separated like in the example above.\n\n";
+    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "Input: ";
 }
 
 void ConsoleUI::displayAddScientistMenu()
@@ -191,6 +270,16 @@ void ConsoleUI::displayAllScientists()
 
     lastCommand = command::display;
 }
+/*void ConsoleUI::displayAllComputers()
+{
+    vector<Computer> computers = computerService.getAllComputers(sortBy, sortAscending);
+
+    displayComputers(computers);
+
+    cout << '\n';
+
+    lastCommand = command::display;
+}*/
 
 void ConsoleUI::displayScientistSearchMenu()
 {
@@ -220,6 +309,39 @@ void ConsoleUI::displayScientistSortMenu()
 
     cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
          << constants::SORT_SCIENTIST_YEAR_DIED_DESCENDING << "Sorts by year died, descending.\n\n";
+
+    cout << "If you would like to go back to the main menu, please type: back\n";
+
+    cout << "Command: ";
+}
+void ConsoleUI::displayComputerSearchMenu()
+{
+    cout << "Search for a computer.\n\n";
+
+    cout << "If you would like to go back to the main menu, please type: back\n";
+    cout << "Input: ";
+}
+
+void ConsoleUI::displayComputerSortMenu()
+{
+    cout << "How should the list be sorted:\n\n";
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << constants::SORT_COMPUTER_NAME_ASCENDING << "Sorts by name, ascending.\n";
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << constants::SORT_COMPUTER_NAME_DESCENDING << "Sorts by name, descending.\n";
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << constants::SORT_COMPUTER_YEAR_OF_BUILD_ASCENDING << "Sorts by year of build, ascending.\n";
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << constants::SORT_COMPUTER_YEAR_OF_BUILD_DESCENDING << "Sorts by year of build, descending.\n";
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << constants::SORT_COMPUTER_TYPE_ASCENDING << "Sorts by type, ascending.\n";
+
+    cout << setw(constants::MENU_COMMAND_WIDTH) << std::left
+         << constants::SORT_COMPUTER_TYPE_DESCENDING << "Sorts by type, descending.\n\n";
 
     cout << "If you would like to go back to the main menu, please type: back\n";
 
@@ -260,6 +382,33 @@ void ConsoleUI::displayScientists(std::vector<Scientist> scientists)
              << setw(12) << std::left << died << endl;
     }
 }
+//TODO
+void ConsoleUI::displayComputers(std::vector<Computer> computers)
+{
+    if (computers.size() == 0)
+    {
+        cout << "No computers found.\n";
+        return;
+    }
+
+    cout << "Printing all computers:\n";
+
+    cout << setw(20) << std::left << "Name:"
+         << setw(8) << std::left << "Type:"
+         << setw(12) << std::left << "Year of build:" << endl;
+
+    for (unsigned int i = 0; i < computers.size(); i++)
+    {
+        string type = (computers.at(i).getType() == computerType::electronic) ? "Electronic" : "Other";
+
+        int yearOfBuild = computers.at(i).getYearOfBuild();
+        string built = (yearOfBuild == constants::YEAR_OF_BUILD_DEFAULT_VALUE) ? "Not built" : utils::intToString(yearOfBuild);
+
+        cout << setw(20) << std::left << computers.at(i).getName()
+             << setw(8) << std::left << type
+             << setw(12) << std::left << built << endl;
+    }
+}
 
 enum addStatus ConsoleUI::addScientist(string data)
 {
@@ -294,6 +443,40 @@ enum addStatus ConsoleUI::addScientist(string data)
             int yearDied = utils::stringToInt(fields.at(3));
 
             return scientistService.addScientist(Scientist(name, gender, yearBorn, yearDied));
+        }
+    }
+
+    return addStatus::invalidInput;
+}
+
+enum addStatus ConsoleUI::addComputer(string data)
+{
+    vector<string> fields = utils::splitString(data, ',');
+
+    // General validation of input, i.e. check if the number of parameters
+    // entered by the user is within the expected range:
+    if (fields.size() > 1 && fields.size() < 4)
+    {
+        string name = fields.at(0);
+
+        computerType type;
+        if (fields.at(1) == "electronic")
+        {
+            type = computerType::electronic;
+        }
+        else
+        {
+            type = computerType::mechanical;
+        }
+
+        if (fields.size() == 2)
+        {
+            return computerService.addComputer(Computer(name, type));
+        }
+        else
+        {
+            int yearOfBuild = utils::stringToInt(fields.at(2));
+            return computerService.addComputer(Computer(name, type, yearOfBuild));
         }
     }
 

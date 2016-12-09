@@ -2,6 +2,7 @@
 #define CONSOLEUI_H
 
 #include "services/scientistservice.h"
+#include "services/computerservice.h"
 #include "utilities/enums.h"
 
 /**
@@ -12,9 +13,15 @@
 enum command {
     menu,
     add,
+    addComputer,
+    addScientist,
     display,
+    displayAllComputers,
+    displayAllScientists,
     search,
     sort,
+    sortScientist,
+    sortComptuer,
     back,
     quit,
     unknown
@@ -43,18 +50,26 @@ private:
     void readInput();
 
     void displayMenu();
-    void displayAddScientistMenu();
+    void displayChooseModelMenu();
     void displayAllScientists();
+    void displayAllComputers();
     void displayScientistSearchMenu();
+    void displayComputerSearchMenu();
     void displayScientistSortMenu();
+    void displayComputerSortMenu();
     void displayUnknownCommandMenu();
     void displayScientists(std::vector<Scientist> scientists);
+    void displayComputers(std::vector<Computer> computers);
+
+    void displayAddComputerMenu();
+    void displayAddScientistMenu();
 
     /**
      * @brief addCommandHandler calls the addScientist function and notifies the user how it went
      * @param userInput the input the user is trying to create a scientist from
      */
-    void addCommandHandler(std::string userInput);
+    void addScientistCommandHandler(std::string userInput);
+    void addComputerCommandHandler(std::string userInput);
 
     /**
      * @brief sortCommandHandler calls the setSort function and notifies the user how it went
@@ -74,6 +89,7 @@ private:
      * @return see addStatus for possible return values
      */
     enum addStatus addScientist(std::string data);
+    enum addStatus addComputer(std::string data);
 
     /**
      * @brief setSort attempts to change how scientists will be sorted based on userinput
@@ -85,6 +101,7 @@ private:
     void displayError(std::string error);
 
     ScientistService scientistService;
+    ComputerService computerService;
     enum command lastCommand;
 
     std::string sortBy;

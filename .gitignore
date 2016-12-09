@@ -39,4 +39,5 @@ CMakeLists.txt.user
 # Build output
 release
 debug
+object_script.*
 

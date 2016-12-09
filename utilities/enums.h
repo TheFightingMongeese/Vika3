@@ -15,7 +15,8 @@ enum addStatus
     yearBornMissing = 3,
     yearDiedBeforeYearBorn = 4,
     invalidInput = 5,
-    generalFailure = 6
+    generalFailure = 6,
+    computerTypeMissing = 7
 };
 
 #endif // ENUMS_H
