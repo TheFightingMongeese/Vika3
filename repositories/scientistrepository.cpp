@@ -66,6 +66,7 @@ vector<Scientist> ScientistRepository::searchForScientists(string searchTerm)
 
 bool ScientistRepository::addScientist(Scientist scientist)
 {
+    bool success = false;
     if (db.connect())
     {
         string name = scientist.getName();
@@ -84,13 +85,31 @@ bool ScientistRepository::addScientist(Scientist scientist)
         {
             query.bindValue(":yearDied", yearDied);
         }
-        return query.exec();
-    }
-    else
-    {
-        return false;
+        success = query.exec();
     }
 
     db.close();
-    return true;
+    return success;
 }
+
+bool ScientistRepository::connectComputer(int scientistID, int computerID)
+{
+    bool success = false;
+    if (db.connect())
+    {
+        QSqlQuery query;
+        query.prepare("INSERT INTO relations (ScientistID, ComputerID) VALUES (:scientistID, :computerID)");
+        query.bindValue(":scientistID", scientistID);
+        query.bindValue(":computerID", computerID);
+        success = query.exec();
+
+        if (!success)
+        {
+            qDebug() << "\nInsert relation error: " << query.lastError();
+        }
+    }
+
+    db.close();
+    return success;
+}
+

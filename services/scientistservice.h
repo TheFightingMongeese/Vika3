@@ -33,6 +33,8 @@ public:
      * @return enum value which indicates the result of the operation (see addStatus definition)
      */
     enum addStatus addScientist(Scientist scientist);
+
+    bool connectComputer(int scientistID, int computerID);
 private:
     ScientistRepository scientistRepo;
 };

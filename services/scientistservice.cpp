@@ -56,3 +56,8 @@ enum addStatus ScientistService::addScientist(Scientist scientist)
 
     return addStatus::success;
 }
+
+bool ScientistService::connectComputer(int scientistID, int computerID)
+{
+    return scientistRepo.connectComputer(scientistID, computerID);
+}

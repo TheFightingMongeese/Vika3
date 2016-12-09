@@ -36,6 +36,8 @@ public:
      */
     bool addScientist(Scientist scientist);
 
+    bool connectComputer(int scientistID, int computerID);
+
 private:
     Database db;
 };
