@@ -19,6 +19,16 @@ Computer::Computer(string name, enum computerType type, int yearOfBuild)
     _yearOfBuild = yearOfBuild;
 }
 
+void Computer::setID(int id)
+{
+    _id = id;
+}
+
+int Computer::getID() const
+{
+    return _id;
+}
+
 std::string Computer::getName() const
 {
     return _name;

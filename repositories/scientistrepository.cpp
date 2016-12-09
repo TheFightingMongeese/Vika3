@@ -23,22 +23,27 @@ std::vector<Scientist> ScientistRepository::getAllScientists()
 
     if (db.connect())
     {
-        QSqlQuery query("SELECT Name, Gender, YearBorn, YearDied FROM scientists");
+        QSqlQuery query("SELECT ID, Name, Gender, YearBorn, YearDied FROM scientists");
 
         while (query.next())
         {
-            std::string name = query.value(0).toString().toStdString();
-            enum genderType gender = utils::stringToGender(query.value(1).toString().toStdString());
-            int yearBorn = query.value(2).toInt();
-            int yearDied = query.value(3).toInt();
+            int id = query.value(0).toInt();
+            std::string name = query.value(1).toString().toStdString();
+            enum genderType gender = utils::stringToGender(query.value(2).toString().toStdString());
+            int yearBorn = query.value(3).toInt();
+            int yearDied = query.value(4).toInt();
 
             if (!yearDied)
             {
-                scientists.push_back(Scientist(name, gender, yearBorn));
+                Scientist scientist(name, gender, yearBorn);
+                scientist.setID(id);
+                scientists.push_back(scientist);
             }
             else
             {
-                scientists.push_back(Scientist(name, gender, yearBorn, yearDied));
+                Scientist scientist(name, gender, yearBorn, yearDied);
+                scientist.setID(id);
+                scientists.push_back(scientist);
             }
         }
     }

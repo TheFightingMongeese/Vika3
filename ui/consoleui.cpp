@@ -451,7 +451,8 @@ void ConsoleUI::displayScientists(std::vector<Scientist> scientists)
 
     cout << "Printing all scientists:\n";
 
-    cout << setw(20) << std::left << "Name:"
+    cout << setw(10) << std::left << "ID:"
+         << setw(20) << std::left << "Name:"
          << setw(8) << std::left << "Gender:"
          << setw(12) << std::left << "Year born:"
          << setw(12) << std::left << "Year died:" << endl;
@@ -463,7 +464,8 @@ void ConsoleUI::displayScientists(std::vector<Scientist> scientists)
         int yearDied = scientists.at(i).getYearDied();
         string died = (yearDied == constants::YEAR_DIED_DEFAULT_VALUE) ? "Alive" : utils::intToString(yearDied);
 
-        cout << setw(20) << std::left << scientists.at(i).getName()
+        cout << setw(10) << std::left << scientists.at(i).getID()
+             << setw(20) << std::left << scientists.at(i).getName()
              << setw(8) << std::left << scientistGender
              << setw(12) << std::left << scientists.at(i).getYearBorn()
              << setw(12) << std::left << died << endl;
@@ -480,7 +482,8 @@ void ConsoleUI::displayComputers(std::vector<Computer> computers)
 
     cout << "Printing all computers:\n";
 
-    cout << setw(20) << std::left << "Name:"
+    cout << setw(10) << std::left << "ID:"
+         << setw(20) << std::left << "Name:"
          << setw(20) << std::left << "Type:"
          << setw(12) << std::left << "Year of build:" << endl;
 
@@ -507,7 +510,8 @@ void ConsoleUI::displayComputers(std::vector<Computer> computers)
         int yearOfBuild = computers.at(i).getYearOfBuild();
         string built = (yearOfBuild == constants::YEAR_OF_BUILD_DEFAULT_VALUE) ? "Not built" : utils::intToString(yearOfBuild);
 
-        cout << setw(20) << std::left << computers.at(i).getName()
+        cout << setw(10) << std::left << computers.at(i).getID()
+             << setw(20) << std::left << computers.at(i).getName()
              << setw(20) << std::left << type
              << setw(12) << std::left << built << endl;
     }

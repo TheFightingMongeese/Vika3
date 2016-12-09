@@ -23,21 +23,26 @@ std::vector<Computer> ComputerRepository::getAllComputers()
 
     if (db.connect())
     {
-        QSqlQuery query("SELECT Name, ComputerType, YearOfBuild FROM computers");
+        QSqlQuery query("SELECT ID, Name, ComputerType, YearOfBuild FROM computers");
 
         while (query.next())
         {
-            std::string name = query.value(0).toString().toStdString();
-            enum computerType type = utils::stringToType(query.value(1).toString().toStdString());
-            int yearOfBuild = query.value(2).toInt();
+            int id = query.value(0).toInt();
+            std::string name = query.value(1).toString().toStdString();
+            enum computerType type = utils::stringToType(query.value(2).toString().toStdString());
+            int yearOfBuild = query.value(3).toInt();
 
             if (!yearOfBuild)
             {
-                computers.push_back(Computer(name, type));
+                Computer computer(name, type);
+                computer.setID(id);
+                computers.push_back(computer);
             }
             else
             {
-                computers.push_back(Computer(name, type, yearOfBuild));
+                Computer computer(name, type, yearOfBuild);
+                computer.setID(id);
+                computers.push_back(computer);
             }
         }
     }
