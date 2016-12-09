@@ -4,8 +4,12 @@
 #include <string>
 
 enum computerType {
-    mechanical,
-    electronic,
+    mechanical = 1,
+    electronic = 2,
+    analog = 3,
+    digital = 4,
+    transistor = 5,
+    integratedCircuit = 6,
 };
 
 /**

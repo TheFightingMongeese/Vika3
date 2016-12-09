@@ -475,9 +475,25 @@ enum addStatus ConsoleUI::addComputer(string data)
         {
             type = computerType::electronic;
         }
-        else
+        else if (fields.at(1) == "mechanical")
         {
             type = computerType::mechanical;
+        }
+        else if(fields.at(1) == "analog")
+        {
+            type = computerType::analog;
+        }
+        else if(fields.at(1) == "digital")
+        {
+            type = computerType::digital;
+        }
+        else if(fields.at(1) == "transistor")
+        {
+            type = computerType::transistor;
+        }
+        else if(fields.at(1) == "integratedCirquit")
+        {
+            type = computerType::integratedCircuit;
         }
 
         if (fields.size() == 2)
