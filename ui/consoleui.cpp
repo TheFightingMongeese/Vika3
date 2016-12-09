@@ -12,6 +12,7 @@ ConsoleUI::ConsoleUI()
     lastCommand = command::menu;
     sortBy = "name";
     sortAscending = true;
+    iukikhh
 }
 
 int ConsoleUI::start()
