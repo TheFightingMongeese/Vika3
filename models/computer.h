@@ -6,7 +6,8 @@
 enum computerType {
     mechanical,
     electronic,
-    electromechanical
+    electromechanical,
+    other
 };
 
 /**

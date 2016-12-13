@@ -93,8 +93,9 @@ namespace utils {
             return computerType::mechanical;
         else if(str=="Electronic")
             return computerType::electronic;
-        else if(str=="Electro-Mechanical")
+        else if (str=="Electro-Mechanical")
             return computerType::electromechanical;
-
+        else
+            return computerType::other;
     }
 }

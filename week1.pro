@@ -1,10 +1,8 @@
-QT += core
-QT -= gui
-QT += sql
+QT += core gui sql
 
-TARGET = week1
-CONFIG += console
-CONFIG -= app_bundle
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = week3
 CONFIG += C++11
 
 TEMPLATE = app
@@ -20,7 +18,8 @@ SOURCES += main.cpp \
     repositories/computerrepository.cpp \
     utilities/computercomparator.cpp \
     services/computerservice.cpp \
-    db/database.cpp
+    db/database.cpp \
+    ui/mainwindow.cpp
 
 HEADERS += \
     models/scientist.h \
@@ -35,8 +34,11 @@ HEADERS += \
     services/computerservice.h \
     models/computer.h \
     utilities/computercomparator.h \
-    db/database.h
+    db/database.h \
+    ui/mainwindow.h
 
 DISTFILES += \
     scientists.sqlite
 
+FORMS += \
+    ui/mainwindow.ui
