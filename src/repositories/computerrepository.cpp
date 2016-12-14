@@ -80,7 +80,7 @@ bool ComputerRepository::addComputer(Computer computer)
     QSqlQuery query(db);
 
     stringstream sqlQuery;
-    sqlQuery << "INSERT INTO Computers (name, type, yearBuilt) VALUES ("
+    sqlQuery << "INSERT INTO Computers (name, computerType, yearBuilt) VALUES ("
              << "'" << computer.getName() << "', "
              << computer.getType() << ", "
              << computer.getYearBuilt()
