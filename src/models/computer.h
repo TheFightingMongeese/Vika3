@@ -2,39 +2,47 @@
 #define COMPUTER_H
 
 #include <string>
+#include <vector>
 
-enum computerType {
-    mechanical,
-    electronic,
-    electromechanical,
-    other
-};
+// Computer can just include scientist like normally
+#include "scientist.h"
 
 /**
  * @brief The data model for computers
  */
+
+enum computerType {
+    electronic,
+    mechatronic,
+    transistor,
+    other
+};
+
 class Computer
 {
 public:
-    Computer(std::string name, computerType type);
-    Computer(std::string name, computerType type, int yearOfBuild);
+    Computer();
+    Computer(std::string name, enum computerType type);
+    Computer(std::string name, enum computerType type, int yearBuilt);
+    Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt);
 
-    int getID() const;
-    std::string getName() const;
-    enum computerType getType() const;
-    int getYearOfBuild() const;
-    bool getBuilt() const;
+    unsigned int getId();
+    std::string getName();
+    enum computerType getType();
+    std::string getTypeName();
+    int getYearBuilt();
+    bool wasBuilt();
+    std::vector<Scientist> getScientists();
 
-    void setID(int id);
-
-    bool contains(std::string searchTerm);
+    void setScientists(std::vector<Scientist> newScientists);
 
 private:
-    int _id;
-    std::string _name;
-    enum computerType _type;
-    int _yearOfBuild;
-    int _built;
+    unsigned int id;
+    std::string name;
+    enum computerType type;
+    int yearBuilt;
+
+    std::vector<Scientist> scientists;
 };
 
 #endif // COMPUTER_H

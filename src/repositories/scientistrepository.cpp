@@ -1,120 +1,139 @@
-#include "repositories/scientistrepository.h"
+#include "scientistrepository.h"
 #include "utilities/utils.h"
 #include "utilities/constants.h"
 
-#include <fstream>
 #include <cstdlib>
+#include <sstream>
 #include <QString>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QVariant>
-#include <QDir>
 
 using namespace std;
 
-
 ScientistRepository::ScientistRepository()
 {
+    db = utils::getDatabaseConnection();
 }
 
-std::vector<Scientist> ScientistRepository::getAllScientists()
+vector<Scientist> ScientistRepository::queryScientists(QString sqlQuery)
 {
     vector<Scientist> scientists;
 
-    if (db.connect())
+    db.open();
+
+    if (!db.isOpen())
     {
-        QSqlQuery query("SELECT ID, Name, Gender, YearBorn, YearDied FROM scientists");
+        return scientists;
+    }
 
-        while (query.next())
-        {
-            int id = query.value(0).toInt();
-            std::string name = query.value(1).toString().toStdString();
-            enum genderType gender = utils::stringToGender(query.value(2).toString().toStdString());
-            int yearBorn = query.value(3).toInt();
-            int yearDied = query.value(4).toInt();
+    QSqlQuery query(db);
 
-            if (!yearDied)
-            {
-                Scientist scientist(name, gender, yearBorn);
-                scientist.setID(id);
-                scientists.push_back(scientist);
-            }
-            else
-            {
-                Scientist scientist(name, gender, yearBorn, yearDied);
-                scientist.setID(id);
-                scientists.push_back(scientist);
-            }
-        }
+    if (!query.exec(sqlQuery))
+    {
+        return scientists;
+    }
+
+    while (query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        enum sexType sex = utils::intToSex(query.value("sex").toInt());
+        int yearBorn = query.value("yearBorn").toInt();
+        int yearDied = query.value("yearDied").toInt();
+
+        scientists.push_back(Scientist(id, name, sex, yearBorn, yearDied));
     }
 
     db.close();
+
+    for (unsigned int i = 0; i < scientists.size(); i++)
+    {
+        Scientist currentScientist = scientists.at(i);
+        currentScientist.setComputers(queryComputersByScientist(currentScientist));
+    }
 
     return scientists;
 }
 
+vector<Scientist> ScientistRepository::getAllScientists(string orderBy, bool orderAscending)
+{
+    string ascending = ((orderAscending) ? "ASC" : "DESC");
+
+    stringstream sqlQuery;
+    sqlQuery << "SELECT * FROM Scientists ORDER BY " << orderBy << " " << ascending;
+
+    return queryScientists(QString::fromStdString(sqlQuery.str()));
+}
+
 vector<Scientist> ScientistRepository::searchForScientists(string searchTerm)
 {
-    vector<Scientist> allScientists = getAllScientists();
-    vector<Scientist> filteredScientists;
+    stringstream sqlQuery;
+    sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << searchTerm << "%"
+           << "' UNION "
+           << "SELECT * FROM Scientists WHERE yearBorn LIKE '%" << searchTerm << "%"
+           << "' UNION "
+           << "SELECT * FROM Scientists WHERE yearDied LIKE '%" << searchTerm << "%'";
 
-    for (unsigned int i = 0; i < allScientists.size(); i++)
-    {
-        if (allScientists.at(i).contains(searchTerm))
-        {
-            filteredScientists.push_back(allScientists.at(i));
-        }
-    }
-
-    return filteredScientists;
+    return queryScientists(QString::fromStdString(sqlQuery.str()));
 }
 
 bool ScientistRepository::addScientist(Scientist scientist)
 {
-    bool success = false;
-    if (db.connect())
+    db.open();
+
+    if (!db.isOpen())
     {
-        string name = scientist.getName();
-        enum genderType gender = scientist.getGender();
-        int yearBorn = scientist.getYearBorn();
-        int yearDied = scientist.getYearDied();
+        return false;
+    }
 
-        QSqlQuery query;
+    QSqlQuery query(db);
 
-        query.prepare("INSERT INTO scientists (name, gender, yearBorn, yearDied) VALUES (:name, :gender, :yearBorn, :yearDied)");
-        query.bindValue(":name", QString::fromStdString(name));
-        query.bindValue(":gender", gender);
-        query.bindValue(":yearBorn", yearBorn);
+    stringstream sqlQuery;
+    sqlQuery << "INSERT INTO Scientists (name, sex, yearBorn, yearDied) VALUES ("
+             << "'" << scientist.getName() << "', "
+             << scientist.getSex() << ", "
+             << scientist.getYearBorn() << ", "
+             << scientist.getYearDied()
+             << ")";
 
-        if (yearDied != constants::YEAR_DIED_DEFAULT_VALUE)
-        {
-            query.bindValue(":yearDied", yearDied);
-        }
-        success = query.exec();
+    if (!query.exec(QString::fromStdString(sqlQuery.str())))
+    {
+        return false;
     }
 
     db.close();
-    return success;
+
+    return true;
 }
 
-bool ScientistRepository::connectComputer(int scientistID, int computerID)
+std::vector<Computer> ScientistRepository::queryComputersByScientist(Scientist scientist)
 {
-    bool success = false;
-    if (db.connect())
-    {
-        QSqlQuery query;
-        query.prepare("INSERT INTO relations (ScientistID, ComputerID) VALUES (:scientistID, :computerID)");
-        query.bindValue(":scientistID", scientistID);
-        query.bindValue(":computerID", computerID);
-        success = query.exec();
+    vector<Computer> computers;
 
-        if (!success)
-        {
-            qDebug() << "\nInsert relation error: " << query.lastError();
-        }
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return computers;
     }
 
-    db.close();
-    return success;
-}
+    QSqlQuery query(db);
 
+    stringstream sqlQuery;
+    sqlQuery << "SELECT s.* FROM ScientistComputerConnections scc ";
+    sqlQuery << "JOIN Computers c ";
+    sqlQuery << "ON c.id = scc.computerId ";
+    sqlQuery << "WHERE scc.scientistId = " << scientist.getId();
+
+    query.exec(QString::fromStdString(sqlQuery.str()));
+
+    while (query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        enum computerType type = utils::intToComputerType(query.value("type").toInt());
+        int yearBuilt = query.value("yearBuilt").toInt();
+
+        computers.push_back(Computer(id, name, type, yearBuilt));
+    }
+
+    return computers;
+}

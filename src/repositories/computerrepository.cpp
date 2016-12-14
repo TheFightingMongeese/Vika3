@@ -1,101 +1,133 @@
-#include "repositories/computerrepository.h"
+#include "computerrepository.h"
 #include "utilities/utils.h"
 #include "utilities/constants.h"
 
-#include <fstream>
-#include <cstdlib>
-#include <QString>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QVariant>
-#include <QDir>
-
 using namespace std;
-
 
 ComputerRepository::ComputerRepository()
 {
+    db = utils::getDatabaseConnection();
 }
 
-std::vector<Computer> ComputerRepository::getAllComputers()
+vector<Computer> ComputerRepository::queryComputers(QString sqlQuery)
 {
     vector<Computer> computers;
 
-    if (db.connect())
+    db.open();
+
+    if (!db.isOpen())
     {
-        QSqlQuery query("SELECT ID, Name, ComputerType, YearOfBuild FROM computers");
+        return computers;
+    }
 
-        while (query.next())
-        {
-            int id = query.value(0).toInt();
-            std::string name = query.value(1).toString().toStdString();
-            enum computerType type = utils::stringToType(query.value(2).toString().toStdString());
-            int yearOfBuild = query.value(3).toInt();
+    QSqlQuery query(db);
 
-            if (!yearOfBuild)
-            {
-                Computer computer(name, type);
-                computer.setID(id);
-                computers.push_back(computer);
-            }
-            else
-            {
-                Computer computer(name, type, yearOfBuild);
-                computer.setID(id);
-                computers.push_back(computer);
-            }
-        }
+    if (!query.exec(sqlQuery))
+    {
+        return computers;
+    }
+
+    while (query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        enum computerType type = utils::intToComputerType(query.value("type").toInt());
+        int yearBuilt = query.value("yearBuilt").toInt();
+
+        computers.push_back(Computer(id, name, type, yearBuilt));
     }
 
     db.close();
+
+    for (unsigned int i = 0; i < computers.size(); i++)
+    {
+        computers.at(i).setScientists(queryScientistsByComputer(computers.at(i)));
+    }
 
     return computers;
 }
 
+vector<Computer> ComputerRepository::getAllComputers(string orderBy, bool orderAscending)
+{
+    string ascending = ((orderAscending) ? "ASC" : "DESC");
+
+    stringstream sqlQuery;
+    sqlQuery << "SELECT * FROM Computers ORDER BY " << orderBy << " " << ascending;
+
+    return queryComputers(QString::fromStdString(sqlQuery.str()));
+}
+
 vector<Computer> ComputerRepository::searchForComputers(string searchTerm)
 {
-    vector<Computer> allComputers = getAllComputers();
-    vector<Computer> filteredComputers;
+    stringstream sqlQuery;
+    sqlQuery << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm << "%"
+           << "' UNION "
+           << "SELECT * FROM Computers WHERE type LIKE '%" << searchTerm << "%"
+           << "' UNION "
+           << "SELECT * FROM Computers WHERE yearBuilt LIKE '%" << searchTerm << "%'";
 
-    for (unsigned int i = 0; i < allComputers.size(); i++)
-    {
-        if (allComputers.at(i).contains(searchTerm))
-        {
-            filteredComputers.push_back(allComputers.at(i));
-        }
-    }
-
-    return filteredComputers;
+    return queryComputers(QString::fromStdString(sqlQuery.str()));
 }
 
 bool ComputerRepository::addComputer(Computer computer)
 {
-    bool success = true;
-    if (db.connect())
+    db.open();
+
+    if (!db.isOpen())
     {
-        string name = computer.getName();
-        enum computerType type = computer.getType();
-        int yearOfBuild = computer.getYearOfBuild();
+        return false;
+    }
 
-        QSqlQuery query;
+    QSqlQuery query(db);
 
-        query.prepare("INSERT INTO computers (Name, ComputerType, YearOfBuild) VALUES (:name, :type, :YearOfBuild)");
-        query.bindValue(":name", QString::fromStdString(name));
-        query.bindValue(":type", type);
+    stringstream sqlQuery;
+    sqlQuery << "INSERT INTO Computers (name, type, yearBuilt) VALUES ("
+             << "'" << computer.getName() << "', "
+             << computer.getType() << ", "
+             << computer.getYearBuilt()
+             << ")";
 
-        if (yearOfBuild != constants::YEAR_OF_BUILD_DEFAULT_VALUE)
-        {
-            query.bindValue(":YearOfBuild", yearOfBuild);
-        }
-
-        success = query.exec();
-
-        if (!success)
-        {
-            qDebug() << "\nInsert computer error: " << query.lastError();
-        }
+    if (!query.exec(QString::fromStdString(sqlQuery.str())))
+    {
+        return false;
     }
 
     db.close();
-    return success;
+
+    return true;
+}
+
+std::vector<Scientist> ComputerRepository::queryScientistsByComputer(Computer computer)
+{
+    vector<Scientist> scientists;
+
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return scientists;
+    }
+
+    QSqlQuery query(db);
+
+    stringstream sqlQuery;
+    sqlQuery << "SELECT s.* FROM ScientistComputerConnections scc ";
+    sqlQuery << "JOIN Scientists s ";
+    sqlQuery << "ON s.id = scc.scientistId ";
+    sqlQuery << "WHERE scc.computerId = " << computer.getId();
+
+    query.exec(QString::fromStdString(sqlQuery.str()));
+
+    while (query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        enum sexType sex = utils::intToSex(query.value("sex").toInt());
+        int yearBorn = query.value("yearBorn").toInt();
+        int yearDied = query.value("yearDied").toInt();
+
+        scientists.push_back(Scientist(id, name, sex, yearBorn, yearDied));
+    }
+
+    return scientists;
 }

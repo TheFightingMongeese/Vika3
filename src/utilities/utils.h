@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <QtSql>
 
 #include "models/scientist.h"
 #include "models/computer.h"
@@ -13,8 +14,8 @@
  * This file contains reusable utility functions used throughout the application
  */
 
-namespace utils {    
-    std::vector<std::string> splitString(std::string line, char delimeter);
+namespace utils {
+    std::vector<std::string> split(std::string line, char delimeter);
 
     int stringToInt(std::string str);
 
@@ -22,13 +23,13 @@ namespace utils {
 
     std::string intToString(int number);
 
-    enum genderType intToGender(int number);
+    enum sexType intToSex(int number);
 
-    enum genderType stringToGender(std::string str);
+    enum computerType intToComputerType(int number);
 
-    enum computerType intToType(int number);
+    enum sexType stringToSex(std::string str);
 
-    enum computerType stringToType(std::string str);
+    QSqlDatabase getDatabaseConnection();
 }
 
 #endif // UTILS_H

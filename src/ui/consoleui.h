@@ -3,31 +3,28 @@
 
 #include "services/scientistservice.h"
 #include "services/computerservice.h"
-#include "utilities/enums.h"
+#include "services/linkservice.h"
 
 /**
- * @brief Holds commands that are available in the UI.
- * Note that this enum is only used in ConsoleUI, and can therefore
- * be declared here.
+ * @brief Holds commands that are available in the UI
  */
+
 enum command {
     menu,
     add,
-    addComputer,
-    addScientist,
     display,
-    displayAllComputers,
-    displayAllScientists,
     search,
-    connect,
-    searchComputer,
-    searchScientist,
     sort,
-    sortScientist,
-    sortComputer,
     back,
     quit,
     unknown
+};
+
+enum commandType {
+    none,
+    scientist,
+    computer,
+    scientistComputerLink
 };
 
 class ConsoleUI
@@ -35,84 +32,109 @@ class ConsoleUI
 public:
     ConsoleUI();
 
-    /**
-     * @brief start is the main run loop for the application
-     * @return should indicate how the program exists, currently always safely
-     */
     int start();
 
 private:
+
     /**
      * @brief display serves as a router to according display functions
      */
     void display();
+
+    void displayMenu();
+
+    void displayAddScientistMenu();
+    void displayAddComputerMenu();
+    void displayAddScientistComputerMenu();
+
+    void displayAllScientists();
+    void displayAllComputers();
+
+    void displaySearchMenu(std::string typeToSearchFor);
+
+    void displayScientistSortMenu();
+    void displayComputerSortMenu();
+
+    void displayUnknownCommandMenu();
+
+    void displayScientists(std::vector<Scientist> scientists);
+    void displayComputers(std::vector<Computer> computers);
+
+    void displayChooseCommandType();
+    void displayError(std::string error);
 
     /**
      * @brief readInput handles user input by settings commands or processing it
      */
     void readInput();
 
-    void displayMenu();
-    void displayChooseModelMenu();
-    void displayAllScientists();
-    void displayAllComputers();
-    void displayScientistSearchMenu();
-    void displayComputerSearchMenu();
-
-    void displayScientistSortMenu();
-    void displayComputerSortMenu();
-    void displayConnect();
-    void displayUnknownCommandMenu();
-    void displayScientists(std::vector<Scientist> scientists);
-    void displayComputers(std::vector<Computer> computers);
-
-    void displayAddComputerMenu();
-    void displayAddScientistMenu();
+    void noneCommandHandler(std::string userInput);
 
     /**
-     * @brief addCommandHandler calls the addScientist function and notifies the user how it went
-     * @param userInput the input the user is trying to create a scientist from
+     * @brief addCommandHandler calls an add function and notifies the user how it went
+     * @param userInput the input the user is trying to create an object from
      */
-    void addScientistCommandHandler(std::string userInput);
-    void addComputerCommandHandler(std::string userInput);
-    void addConnectionCommandHandler(std::string userInput);
+    void addCommandHandler(std::string userInput);
 
     /**
-     * @brief sortCommandHandler calls the setSort function and notifies the user how it went
+     * @brief sortCommandHandler calls a sort function and notifies the user how it went
      * @param userInput the input the user is trying to change sort from
      */
     void sortCommandHandler(std::string userInput);
-    void sortComputerCommandHandler(std::string UserInput);
+
     /**
-     * @brief searchCommandHandler calls the scientistService displays a list of filtered users
+     * @brief searchCommandHandler calls a relevant service depending on last command type to display a list of filtered users
      * @param userInput a string sent as input to the search function
      */
     void searchCommandHandler(std::string userInput);
-    void searchComputerCommandHandler(std::string userInput);
+
     /**
      * @brief addScientist attempts to add a scientist
      * @param data A string containing the user input
-     * @return see addStatus for possible return values
+     * @return true if it was a success, false if it was a failure
      */
-    enum addStatus addScientist(std::string data);
-    enum addStatus addComputer(std::string data);
-    bool addConnection(std::string data);
+    bool addScientist(std::string data);
 
     /**
-     * @brief setSort attempts to change how scientists will be sorted based on userinput
+     * @brief addComputer attempts to add a computer
+     * @param data A string containing the user input
+     * @return true if it was a success, false if it was a failure
+     */
+    bool addComputer(std::string data);
+
+    /**
+     * @brief addLink attempts to add a computer
+     * @param data A string containing the user input
+     * @return true if it was a success, false if it was a failure
+     */
+    bool addLink(std::string data);
+
+    /**
+     * @brief setScientistSort attempts to change how scientists will be sorted based on userinput
      * @param sortCommand the sort rule, rules are stored in constants.h
      * @return true if it was a success, false if it was a failure
      */
-    bool setSort(std::string sortCommand);
+    bool setScientistSort(std::string sortCommand);
+
+    /**
+     * @brief setComputerSort attempts to change how computers will be sorted based on userinput
+     * @param sortCommand the sort rule, rules are stored in constants.h
+     * @return true if it was a success, false if it was a failure
+     */
     bool setComputerSort(std::string sortCommand);
-    void displayError(std::string error);
 
     ScientistService scientistService;
     ComputerService computerService;
-    enum command lastCommand;
+    LinkService linkService;
 
-    std::string sortBy;
-    bool sortAscending;
+    enum command lastCommand;
+    enum commandType lastCommandType;
+
+    std::string sortScientistsBy;
+    bool sortScientistsAscending;
+
+    std::string sortComputersBy;
+    bool sortComputersAscending;
 };
 
 #endif // CONSOLEUI_H

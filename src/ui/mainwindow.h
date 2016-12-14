@@ -21,11 +21,16 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_Tabs_currentChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     ScientistService _scientistService;
+    ComputerService _computerService;
 
-    void displayTable();
+    void displayScientistTable(QString filter = "");
+    void displayComputerTable();
 };
 
 #endif // MAINWINDOW_H
