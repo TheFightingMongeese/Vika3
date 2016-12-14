@@ -13,32 +13,31 @@ SOURCES += main.cpp \
     services/scientistservice.cpp \
     ui/consoleui.cpp \
     utilities/utils.cpp \
-    utilities/scientistcomparator.cpp \
     models/computer.cpp \
     repositories/computerrepository.cpp \
-    utilities/computercomparator.cpp \
+    repositories/linkrepository.cpp \
     services/computerservice.cpp \
-    db/database.cpp \
-    ui/mainwindow.cpp
+    services/linkservice.cpp \
+    ui/mainwindow.cpp \
+    ui/editscientist.cpp
 
 HEADERS += \
     models/scientist.h \
-    utilities/utils.h \
-    utilities/constants.h \
+    repositories/scientistrepository.h \
     services/scientistservice.h \
     ui/consoleui.h \
-    utilities/scientistcomparator.h \
-    utilities/enums.h \
-    repositories/computerrepository.h \
-    repositories/scientistrepository.h \
-    services/computerservice.h \
+    utilities/utils.h \
     models/computer.h \
-    utilities/computercomparator.h \
-    db/database.h \
-    ui/mainwindow.h
+    repositories/computerrepository.h \
+    repositories/linkrepository.h \
+    services/computerservice.h \
+    services/linkservice.h \
+    ui/mainwindow.h \
+    ui/editscientist.h
 
 DISTFILES += \
     scientists.sqlite
 
 FORMS += \
-    ui/mainwindow.ui
+    ui/mainwindow.ui \
+    ui/editscientist.ui

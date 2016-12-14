@@ -1,85 +1,117 @@
-#include "models/scientist.h"
+#include "scientist.h"
 #include "utilities/utils.h"
 #include "utilities/constants.h"
 
 using namespace std;
 
-Scientist::Scientist(string name, enum genderType gender, int yearBorn)
+Scientist::Scientist()
 {
-    _name = name;
-    _gender = gender;
-    _yearBorn = yearBorn;
-    _yearDied = constants::YEAR_DIED_DEFAULT_VALUE;
+
 }
 
-Scientist::Scientist(string name, enum genderType gender, int yearBorn, int yearDied)
+Scientist::~Scientist()
 {
-    _name = name;
-    _gender = gender;
-    _yearBorn = yearBorn;
-    _yearDied = yearDied;
+    destroyComputers();
 }
 
-void Scientist::setID(int id)
+Scientist::Scientist(string name, enum sexType sex, int yearBorn)
 {
-    _id = id;
+    id = 0;
+    this->name = name;
+    this->sex = sex;
+    this->yearBorn = yearBorn;
+    this->yearDied = constants::YEAR_UNSELECTED_VALUE;
 }
 
-int Scientist::getID() const
+Scientist::Scientist(string name, enum sexType sex, int yearBorn, int yearDied)
 {
-    return _id;
+    id = 0;
+    this->name = name;
+    this->sex = sex;
+    this->yearBorn = yearBorn;
+    this->yearDied = yearDied;
+}
+
+Scientist::Scientist(unsigned int id, std::string name, sexType sex, int yearBorn, int yearDied)
+{
+    this->id = id;
+    this->name = name;
+    this->sex = sex;
+    this->yearBorn = yearBorn;
+    this->yearDied = yearDied;
+}
+
+unsigned int Scientist::getId()
+{
+    return id;
 }
 
 std::string Scientist::getName() const
 {
-    return _name;
+    return name;
 }
 
-enum genderType Scientist::getGender() const
+enum sexType Scientist::getSex() const
 {
-    return _gender;
+    return sex;
 }
 
 int Scientist::getYearBorn() const
 {
-    return _yearBorn;
+    return yearBorn;
 }
 
 int Scientist::getYearDied() const
 {
-    return _yearDied;
+    return yearDied;
+}
+
+std::vector<Computer*> Scientist::getComputers() const
+{
+    return computers;
+}
+
+void Scientist::setComputers(std::vector<Computer> newComputers)
+{
+    destroyComputers();
+
+    for (unsigned int i = 0; i < newComputers.size(); i++)
+    {
+        Computer currentComputer = newComputers.at(i);
+        this->computers.push_back(new Computer(currentComputer.getId(), currentComputer.getName(), currentComputer.getType(), currentComputer.getYearBuilt()));
+    }
 }
 
 bool Scientist::contains(string searchTerm)
 {
     string searchTermLower = utils::stringToLower(searchTerm);
 
-    string nameLower = utils::stringToLower(_name);
+    string nameLower = utils::stringToLower(name);
     if (nameLower.find(searchTermLower) != string::npos)
     {
         return true;
     }
 
-    if (searchTermLower == "male" && _gender == genderType::male)
+    if (searchTermLower == "male" && sex == sexType::male)
     {
         return true;
     }
 
-    if (searchTermLower == "female" && _gender == genderType::female)
+    if (searchTermLower == "female" && sex == sexType::female)
     {
         return true;
     }
 
-    string yearBornString = utils::intToString(_yearBorn);
+    string yearBornString = utils::intToString(yearBorn);
 
     if (yearBornString.find(searchTerm) != string::npos)
     {
         return true;
     }
 
-    if (_yearDied != constants::YEAR_DIED_DEFAULT_VALUE)
+    if (yearDied != constants::YEAR_UNSELECTED_VALUE)
     {
-        string yearDiedString = utils::intToString(_yearDied);
+        string yearDiedString = utils::intToString(yearDied);
 
         if (yearDiedString.find(searchTerm) != string::npos)
         {
@@ -95,4 +127,12 @@ bool Scientist::contains(string searchTerm)
     }
 
     return false;
+}
+
+void Scientist::destroyComputers()
+{
+    for (unsigned int i = 0; i < computers.size(); i++)
+    {
+        delete computers.at(i);
+    }
 }

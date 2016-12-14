@@ -16,10 +16,13 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <widget class="QWidget" name="tab">
+     <widget class="QTabWidget" name="Tabs">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="TabScientist">
        <attribute name="title">
-        <string>Tab 1</string>
+        <string>Scientists</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
@@ -27,10 +30,15 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="TabComputer">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>Computers</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTableWidget" name="tableWidgetComputers"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

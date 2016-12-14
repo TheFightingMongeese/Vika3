@@ -1,88 +1,88 @@
-#include "models/computer.h"
-#include "utilities/utils.h"
+#include "computer.h"
 #include "utilities/constants.h"
 
 using namespace std;
 
+Computer::Computer()
+{
+
+}
 
 Computer::Computer(string name, enum computerType type)
 {
-    _name = name;
-    _type = type;
-    _yearOfBuild = constants::YEAR_OF_BUILD_DEFAULT_VALUE;
+    id = 0;
+    this->name = name;
+    this->type = type;
+    this->yearBuilt = constants::YEAR_UNSELECTED_VALUE;
 }
 
-Computer::Computer(string name, enum computerType type, int yearOfBuild)
+Computer::Computer(string name, enum computerType type, int yearBuilt)
 {
-    _name = name;
-    _type = type;
-    _yearOfBuild = yearOfBuild;
+    id = 0;
+    this->name = name;
+    this->type = type;
+    this->yearBuilt = yearBuilt;
 }
 
-void Computer::setID(int id)
+Computer::Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt)
 {
-    _id = id;
+    this->id = id;
+    this->name = name;
+    this->type = type;
+    this->yearBuilt = yearBuilt;
 }
 
-int Computer::getID() const
+unsigned int Computer::getId()
 {
-    return _id;
+    return id;
 }
 
-std::string Computer::getName() const
+string Computer::getName()
 {
-    return _name;
+    return name;
 }
 
-enum computerType Computer::getType() const
+int Computer::getYearBuilt()
 {
-    return _type;
+    return yearBuilt;
 }
 
-int Computer::getYearOfBuild() const
+enum computerType Computer::getType()
 {
-    return _yearOfBuild;
+    return type;
 }
 
-bool Computer::getBuilt() const
+string Computer::getTypeName()
 {
-    return _yearOfBuild != constants::YEAR_OF_BUILD_DEFAULT_VALUE;
-}
-
-bool Computer::contains(string searchTerm)
-{
-    string searchTermLower = utils::stringToLower(searchTerm);
-
-    string nameLower = utils::stringToLower(_name);
-    if (nameLower.find(searchTermLower) != string::npos)
+    if (type == computerType::electronic)
     {
-        return true;
+        return "Electronic";
     }
-
-    if (searchTermLower == "electronic" && _type == computerType::electronic)
+    else if (type == computerType::mechatronic)
     {
-        return true;
+        return "Mechatronic";
     }
-
-    if (searchTermLower == "mechanical" && _type == computerType::mechanical)
+    else if (type == computerType::transistor)
     {
-        return true;
+        return "Transistor";
     }
-
-    if (_yearOfBuild != constants::YEAR_OF_BUILD_DEFAULT_VALUE)
+    else
     {
-        string yearOfBuildString = utils::intToString(_yearOfBuild);
-
-        if (yearOfBuildString.find(searchTerm) != string::npos)
-        {
-            return true;
-        }
+        return "Other";
     }
+}
 
-    if (searchTermLower == "Not built" && !this->getBuilt())
-    {
-        return true;
-    }
+bool Computer::wasBuilt()
+{
+    return yearBuilt != constants::YEAR_UNSELECTED_VALUE;
+}
 
-    return false;
+std::vector<Scientist> Computer::getScientists()
+{
+    return scientists;
+}
+
+void Computer::setScientists(std::vector<Scientist> newScientists)
+{
+    scientists = newScientists;
 }

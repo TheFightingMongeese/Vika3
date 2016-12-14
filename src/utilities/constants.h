@@ -8,13 +8,10 @@
  */
 
 namespace constants {
-    const std::string DATABASE_NAME = "scientists.sqlite";
     const char FILE_DELIMETER = '\t';
-    const int YEAR_DIED_DEFAULT_VALUE = 13337;
-    const int YEAR_OF_BUILD_DEFAULT_VALUE = 51994;
+    const int YEAR_UNSELECTED_VALUE = 13337;
 
-    const unsigned int MENU_COMMAND_WIDTH = 5;
-    const unsigned int SORT_COMMAND_WIDTH = 15;
+    const unsigned int MENU_COMMAND_WIDTH = 15;
 
     const std::string SORT_SCIENTIST_NAME_ASCENDING = "name-asc";
     const std::string SORT_SCIENTIST_NAME_DESCENDING = "name-desc";
@@ -25,10 +22,13 @@ namespace constants {
 
     const std::string SORT_COMPUTER_NAME_ASCENDING = "name-asc";
     const std::string SORT_COMPUTER_NAME_DESCENDING = "name-desc";
-    const std::string SORT_COMPUTER_YEAR_OF_BUILD_ASCENDING = "build-asc";
-    const std::string SORT_COMPUTER_YEAR_OF_BUILD_DESCENDING = "build-desc";
-    const std::string SORT_COMPUTER_TYPE_ASCENDING = "built-asc";
-    const std::string SORT_COMPUTER_TYPE_DESCENDING = "built-desc";
+    const std::string SORT_COMPUTER_TYPE_ASCENDING = "type-asc";
+    const std::string SORT_COMPUTER_TYPE_DESCENDING = "type-desc";
+    const std::string SORT_COMPUTER_YEAR_BUILT_ASCENDING = "built-asc";
+    const std::string SORT_COMPUTER_YEAR_BUILT_DESCENDING = "built-desc";
+
+    const std::string DATABASE_TYPE = "QSQLITE";
+    const std::string DATABASE_NAME = "database.sqlite";
 }
 
 #endif // CONSTANTS_H
