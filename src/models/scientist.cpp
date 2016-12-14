@@ -13,8 +13,7 @@ Scientist::~Scientist()
     destroyComputers();
 }
 
-Scientist::Scientist(string name, string sex, int yearBorn)
-{
+Scientist::Scientist(string name, enum sexType sex, int yearBorn){
     id = 0;
     this->name = name;
     this->sex = sex;
@@ -22,7 +21,7 @@ Scientist::Scientist(string name, string sex, int yearBorn)
     this->yearDied = 0;
 }
 
-Scientist::Scientist(string name, std::string sex, int yearBorn, int yearDied)
+Scientist::Scientist(string name, enum sexType sex, int yearBorn, int yearDied)
 {
     id = 0;
     this->name = name;
@@ -31,7 +30,7 @@ Scientist::Scientist(string name, std::string sex, int yearBorn, int yearDied)
     this->yearDied = yearDied;
 }
 
-Scientist::Scientist(unsigned int id, std::string name, std::string sex, int yearBorn, int yearDied)
+Scientist::Scientist(unsigned int id, std::string name, sexType sex, int yearBorn, int yearDied)
 {
     this->id = id;
     this->name = name;
@@ -49,17 +48,12 @@ std::string Scientist::getName() const
 {
     return name;
 }
-/*
+
 enum sexType Scientist::getSex() const
 {
     return sex;
 }
-*/
 
-std::string Scientist::getSex() const
-{
-    return sex;
-}
 
 int Scientist::getYearBorn() const
 {
@@ -97,13 +91,11 @@ bool Scientist::contains(string searchTerm)
         return true;
     }
 
-    if (searchTermLower == "male" && sex == "male")
-    {
+    if (searchTermLower == "male" && sex == sexType::male)    {
         return true;
     }
 
-    if (searchTermLower == "female" && sex == "female")
-    {
+    if (searchTermLower == "female" && sex == sexType::female)    {
         return true;
     }
 

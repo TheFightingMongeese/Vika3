@@ -29,6 +29,9 @@ namespace utils {
 
     enum sexType stringToSex(std::string str);
 
+    std::string sexToString(sexType type);
+
+
     QSqlDatabase getDatabaseConnection();
 }
 

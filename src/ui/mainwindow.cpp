@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "numberwidgetitem.h"
+#include "utilities/utils.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -43,7 +44,7 @@ void MainWindow::displayScientistTable(QString filter)
         Scientist s = scientists.at(i);
         QString scientistID = QString::number(s.getId());
         QString name = QString::fromStdString(s.getName());
-        QString sexType = QString::fromStdString(s.getSex());
+        QString sexType = QString::fromStdString(utils::sexToString(s.getSex()));
         QString yearBorn = QString::number(s.getYearBorn());
         QString yearDied = QString::number(s.getYearDied());
 

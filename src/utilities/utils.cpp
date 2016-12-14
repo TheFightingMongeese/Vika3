@@ -88,6 +88,11 @@ namespace utils {
         return intToSex(stringToInt(str));
     }
 
+    std::string sexToString(sexType type)
+    {
+        return type == sexType::male ? "Male" : "Female";
+    }
+
     QSqlDatabase getDatabaseConnection()
     {
         QString connectionName = "Smuu";
