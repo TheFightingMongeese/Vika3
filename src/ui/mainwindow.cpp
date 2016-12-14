@@ -75,11 +75,16 @@ void MainWindow::displayComputerTable()
         Computer c = computers.at(i);
         QString computerID = QString::number(c.getId());
         QString name = QString::fromStdString(c.getName());
+        QString type = QString::fromStdString(c.getType());
+        QString yearBuilt = QString::number(c.getYearBuilt());
 
         qDebug() << computerID << name;
 
         table->setItem(i, 0, new NumberWidgetItem(computerID));
         table->setItem(i, 1, new QTableWidgetItem(name));
+        table->setItem(i, 2, new QTableWidgetItem(type));
+        table->setItem(i, 3, new QTableWidgetItem(yearBuilt));
+
     }
 }
 
