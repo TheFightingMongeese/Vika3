@@ -7,7 +7,7 @@ Computer::Computer()
 
 }
 
-Computer::Computer(string name, enum computerType type)
+Computer::Computer(string name, std::string type)
 {
     id = 0;
     this->name = name;
@@ -15,7 +15,7 @@ Computer::Computer(string name, enum computerType type)
     this->yearBuilt = 0;
 }
 
-Computer::Computer(string name, enum computerType type, int yearBuilt)
+Computer::Computer(string name, string type, int yearBuilt)
 {
     id = 0;
     this->name = name;
@@ -23,7 +23,7 @@ Computer::Computer(string name, enum computerType type, int yearBuilt)
     this->yearBuilt = yearBuilt;
 }
 
-Computer::Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt)
+Computer::Computer(unsigned int id, string name, string type, int yearBuilt)
 {
     this->id = id;
     this->name = name;
@@ -41,17 +41,22 @@ string Computer::getName()
     return name;
 }
 
+string Computer::getType()
+{
+    return type;
+}
+
 int Computer::getYearBuilt()
 {
     return yearBuilt;
 }
 
-enum computerType Computer::getType()
+/*enum computerType Computer::getType()
 {
     return type;
-}
+}*/
 
-string Computer::getTypeName()
+/*string Computer::getTypeName()
 {
     if (type == computerType::electronic)
     {
@@ -69,7 +74,7 @@ string Computer::getTypeName()
     {
         return "Other";
     }
-}
+}*/
 
 bool Computer::wasBuilt()
 {
