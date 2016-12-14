@@ -1,5 +1,4 @@
 #include "computer.h"
-#include "utilities/constants.h"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ Computer::Computer(string name, enum computerType type)
     id = 0;
     this->name = name;
     this->type = type;
-    this->yearBuilt = constants::YEAR_UNSELECTED_VALUE;
+    this->yearBuilt = 0;
 }
 
 Computer::Computer(string name, enum computerType type, int yearBuilt)
@@ -74,7 +73,7 @@ string Computer::getTypeName()
 
 bool Computer::wasBuilt()
 {
-    return yearBuilt != constants::YEAR_UNSELECTED_VALUE;
+    return yearBuilt != 0;
 }
 
 std::vector<Scientist> Computer::getScientists()
