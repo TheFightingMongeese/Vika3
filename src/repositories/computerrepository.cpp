@@ -31,7 +31,7 @@ vector<Computer> ComputerRepository::queryComputers(QString sqlQuery)
         int id = query.value("id").toUInt();
         string name = query.value("name").toString().toStdString();
         //enum computerType type = utils::intToComputerType(query.value("type").toInt());
-        string type = query.value("type").toString().toStdString();
+        string type = query.value("computerType").toString().toStdString();
         int yearBuilt = query.value("yearBuilt").toInt();
 
         computers.push_back(Computer(id, name, type, yearBuilt));
@@ -81,7 +81,7 @@ bool ComputerRepository::addComputer(Computer computer)
     QSqlQuery query(db);
 
     stringstream sqlQuery;
-    sqlQuery << "INSERT INTO Computers (name, type, yearBuilt) VALUES ("
+    sqlQuery << "INSERT INTO Computers (name, computerType, yearBuilt) VALUES ("
              << "'" << computer.getName() << "', "
              << computer.getType() << ", "
              << computer.getYearBuilt()
