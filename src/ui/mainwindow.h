@@ -24,7 +24,7 @@ public:
 private slots:
     void on_Tabs_currentChanged(int index);
 
-    void on_pushButton_clicked(bool checked);
+
 
 private:
     Ui::MainWindow *ui;

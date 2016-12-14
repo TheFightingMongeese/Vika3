@@ -1,5 +1,4 @@
 #include "utilities/utils.h"
-#include "utilities/constants.h"
 
 #include <sstream>
 #include <cstdlib>
@@ -100,8 +99,8 @@ namespace utils {
         }
         else
         {
-            db = QSqlDatabase::addDatabase(constants::DATABASE_TYPE.c_str(), connectionName);
-            db.setDatabaseName(constants::DATABASE_NAME.c_str());
+            db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+            db.setDatabaseName("database.sqlite");
 
             db.open();
         }

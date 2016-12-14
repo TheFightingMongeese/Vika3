@@ -11,7 +11,6 @@ SOURCES += main.cpp \
     models/scientist.cpp \
     repositories/scientistrepository.cpp \
     services/scientistservice.cpp \
-    ui/consoleui.cpp \
     utilities/utils.cpp \
     models/computer.cpp \
     repositories/computerrepository.cpp \
@@ -25,7 +24,6 @@ HEADERS += \
     models/scientist.h \
     repositories/scientistrepository.h \
     services/scientistservice.h \
-    ui/consoleui.h \
     utilities/utils.h \
     models/computer.h \
     repositories/computerrepository.h \
@@ -36,7 +34,7 @@ HEADERS += \
     ui/editscientist.h
 
 DISTFILES += \
-    scientists.sqlite
+    database.sqlite
 
 FORMS += \
     ui/mainwindow.ui \

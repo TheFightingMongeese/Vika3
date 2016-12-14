@@ -1,6 +1,5 @@
 #include "scientist.h"
 #include "utilities/utils.h"
-#include "utilities/constants.h"
 
 using namespace std;
 
@@ -20,7 +19,7 @@ Scientist::Scientist(string name, enum sexType sex, int yearBorn)
     this->name = name;
     this->sex = sex;
     this->yearBorn = yearBorn;
-    this->yearDied = constants::YEAR_UNSELECTED_VALUE;
+    this->yearDied = 0;
 }
 
 Scientist::Scientist(string name, enum sexType sex, int yearBorn, int yearDied)
@@ -109,7 +108,7 @@ bool Scientist::contains(string searchTerm)
         return true;
     }
 
-    if (yearDied != constants::YEAR_UNSELECTED_VALUE)
+    if (yearDied != 0)
     {
         string yearDiedString = utils::intToString(yearDied);
 

@@ -1,6 +1,5 @@
 #include "scientistrepository.h"
 #include "utilities/utils.h"
-#include "utilities/constants.h"
 
 #include <cstdlib>
 #include <sstream>
