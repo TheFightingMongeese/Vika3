@@ -31,6 +31,7 @@ namespace utils {
 
     QSqlDatabase getDatabaseConnection();
 }
+//Q_ENUM(sexType)
 
 #endif // UTILS_H
 
