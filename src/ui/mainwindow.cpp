@@ -49,7 +49,7 @@ void MainWindow::displayScientistTable(QString filter)
 
         qDebug() << scientistID << name;
 
-        table->setItem(i, 0, new QTableWidgetItem(scientistID));
+        table->setItem(i, 0, new NumberWidgetItem(scientistID));
         table->setItem(i, 1, new QTableWidgetItem(name));
         table->setItem(i, 2, new QTableWidgetItem(sexType));
         table->setItem(i, 3, new QTableWidgetItem(yearBorn));
@@ -77,7 +77,7 @@ void MainWindow::displayComputerTable()
 
         qDebug() << computerID << name;
 
-        table->setItem(i, 0, new QTableWidgetItem(computerID));
+        table->setItem(i, 0, new NumberWidgetItem(computerID));
         table->setItem(i, 1, new QTableWidgetItem(name));
     }
 }
