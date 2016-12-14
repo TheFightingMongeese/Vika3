@@ -22,13 +22,14 @@ class Computer
 {
 public:
     Computer();
-    Computer(std::string name, enum computerType type);
-    Computer(std::string name, enum computerType type, int yearBuilt);
-    Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt);
+    Computer(std::string name, std::string type);
+    Computer(std::string name, std::string type, int yearBuilt);
+    Computer(unsigned int id, std::string name, std::string type, int yearBuilt);
 
     unsigned int getId();
     std::string getName();
-    enum computerType getType();
+    std::string getType();
+
     std::string getTypeName();
     int getYearBuilt();
     bool wasBuilt();
@@ -39,7 +40,7 @@ public:
 private:
     unsigned int id;
     std::string name;
-    enum computerType type;
+    std::string type;
     int yearBuilt;
 
     std::vector<Scientist> scientists;
