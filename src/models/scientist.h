@@ -21,13 +21,14 @@ class Scientist
 public:
     Scientist();
     ~Scientist();
-    Scientist(std::string name, sexType sex, int yearBorn);
-    Scientist(std::string name, sexType sex, int yearBorn, int yearDied);
-    Scientist(unsigned int id, std::string name, sexType sex, int yearBorn, int yearDied);
+    Scientist(std::string name, std::string sex, int yearBorn);
+    Scientist(std::string name, std::string sex, int yearBorn, int yearDied);
+    Scientist(unsigned int id, std::string name, std::string sex, int yearBorn, int yearDied);
 
     unsigned int getId();
     std::string getName() const;
-    enum sexType getSex() const;
+    //enum sexType getSex() const;
+    std::string getSex() const;
     int getYearBorn() const;
     int getYearDied() const;
     std::vector<Computer*> getComputers() const;
@@ -41,7 +42,8 @@ private:
 
     unsigned int id;
     std::string name;
-    enum sexType sex;
+    //enum sexType sex;
+    std::string sex;
     int yearBorn;
     int yearDied;
 

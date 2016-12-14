@@ -42,11 +42,18 @@ void MainWindow::displayScientistTable(QString filter)
         Scientist s = scientists.at(i);
         QString scientistID = QString::number(s.getId());
         QString name = QString::fromStdString(s.getName());
+        QString sexType = QString::fromStdString(s.getSex());
+        QString yearBorn = QString::number(s.getYearBorn());
+        QString yearDied = QString::number(s.getYearDied());
+
 
         qDebug() << scientistID << name;
 
         table->setItem(i, 0, new QTableWidgetItem(scientistID));
         table->setItem(i, 1, new QTableWidgetItem(name));
+        table->setItem(i, 2, new QTableWidgetItem(sexType));
+        table->setItem(i, 3, new QTableWidgetItem(yearBorn));
+        table->setItem(i, 4, new QTableWidgetItem(yearDied));
     }
 }
 void MainWindow::displayComputerTable()

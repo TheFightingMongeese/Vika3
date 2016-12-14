@@ -121,7 +121,8 @@ std::vector<Scientist> ComputerRepository::queryScientistsByComputer(Computer co
     {
         int id = query.value("id").toUInt();
         string name = query.value("name").toString().toStdString();
-        enum sexType sex = utils::intToSex(query.value("sex").toInt());
+        //enum sexType sex = utils::intToSex(query.value("sex").toInt());
+        string sex = query.value("sex").toString().toStdString();
         int yearBorn = query.value("yearBorn").toInt();
         int yearDied = query.value("yearDied").toInt();
 
