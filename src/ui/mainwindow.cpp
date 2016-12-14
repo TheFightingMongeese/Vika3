@@ -88,3 +88,8 @@ void MainWindow::on_Tabs_currentChanged(int index)
     }
 
 }
+
+void MainWindow::on_pushButton_clicked(bool checked)
+{
+
+}
