@@ -22,8 +22,9 @@ void MainWindow::displayTable()
     QTableWidget *table = ui->tableWidgetScientists;
     table->clear();
 
+
     QStringList tableHeader;
-    tableHeader << "ID" << "Name";
+    tableHeader << "ID" << "Name" << "Born" << "Died" ; // << Sex
     table->setColumnCount(tableHeader.size());
     table->setRowCount(scientists.size());
     table->setHorizontalHeaderLabels(tableHeader);
@@ -33,10 +34,13 @@ void MainWindow::displayTable()
         Scientist s = scientists.at(i);
         QString scientistID = QString::number(s.getID());
         QString name = QString::fromStdString(s.getName());
-
+        //QString sex = QString::convertEnumToQString(s.getGender());
+        QString born = QString::number(s.getYearBorn());
+        QString died = QString::number(s.getYearDied());
         qDebug() << scientistID << name;
 
         table->setItem(i, 0, new QTableWidgetItem(scientistID));
         table->setItem(i, 1, new QTableWidgetItem(name));
     }
 }
+

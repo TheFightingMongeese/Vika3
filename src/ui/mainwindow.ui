@@ -17,11 +17,17 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLineEdit" name="Searchbox"/>
+        </item>
         <item>
          <widget class="QTableWidget" name="tableWidgetScientists"/>
         </item>
@@ -42,7 +48,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

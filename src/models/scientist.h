@@ -7,6 +7,7 @@ enum genderType {
     female,
     male
 };
+//Q_ENUM(genderType);
 
 /**
  * @brief The data model for scientists
