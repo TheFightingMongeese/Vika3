@@ -13,7 +13,7 @@
 
 enum computerType {
     electronic,
-    mechatronic,
+    mechanical,
     transistor,
     other
 };

@@ -57,9 +57,9 @@ std::string Computer::getTypeAsString()
     {
         return "Electronic";
     }
-    else if (type == computerType::mechatronic)
+    else if (type == computerType::mechanical)
     {
-        return "Mechatronic";
+        return "Mechanical";
     }
     else if (type == computerType::transistor)
     {
