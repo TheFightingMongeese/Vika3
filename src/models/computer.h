@@ -12,10 +12,10 @@
  */
 
 enum computerType {
-    electronic,
-    mechanical,
-    transistor,
-    other
+    Electronic,
+    Mechanical,
+    Transistor,
+    Other
 };
 
 class Computer

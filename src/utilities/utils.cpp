@@ -93,14 +93,9 @@ namespace utils {
         return type == sexType::male ? "Male" : "Female";
     }
 
-    std::string typeToString(computerType type)
-    {
-        return type == computerType::mechanical ? "mechanical" : "electronic";
-    }
-
     QSqlDatabase getDatabaseConnection()
     {
-        QString connectionName = "Smuu";
+        QString connectionName = "Sigga";
         QSqlDatabase db;
 
         if(QSqlDatabase::contains(connectionName))
