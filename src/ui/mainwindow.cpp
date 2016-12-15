@@ -3,6 +3,8 @@
 #include "numberwidgetitem.h"
 #include "utilities/utils.h"
 
+#include <string>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -118,3 +120,66 @@ void MainWindow::on_btnAddScientist_clicked()
         displayScientistTable();
     }
 }
+
+void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
+{
+    //QLineEdit::text();
+
+    //ui->QLineEdit::text();
+
+ // ui->SearchScientist->clear();
+
+   /* for(unsigned int i = 0; i < Scientist.size();i++)
+    {
+        Scientist currentScientists = scientists.at(i);
+        ui->displayScientistTable->addItem(QString::fromStdString(currentScientists.getName()));
+    }*/
+  //  QString input = ui->SearchScientist->text();
+   // vector<Scientist> scientistVector;                                       byrjun sem semi virkar
+    //scientistVector = _scientistService.searchForScientists("Dennis");
+    //ui->tableWidgetScientists->setItem(0,1,new QTableWidgetItem(QString::fromStdString(scientistVector[0].getName())));
+    // endir sem semi virkar
+   // query.exec("SELECT FROM scientists WHERE name LIKE %input%");     // SQL Search skipunin
+
+    ui->tableWidgetScientists->clearContents();
+
+    ui->tableWidgetScientists->setRowCount(currentScientist.size());
+
+    currentlyDisplayedScientist.clear();
+
+    for(unsigned int i = 0; i < currentScientist.size(); ++i)
+    {
+        Scientist currentScience = currentScientist[i];
+
+        std::string searchString = ui->SearchScientist->text().toStdString();
+
+        if(currentScience.contains(searchString))
+        {
+            QString scientistname = QString::fromStdString(currentScience.getName());
+            QString scientistsex = QString::fromStdString(currentScience.getSex());
+            QString scientistborn = QString::fromStdString(std::to_string(currentScience.getYearBorn()));
+            QString scientistdied = QString::fromStdString(std::to_string(currentScience.getYearDied()));
+
+
+            int currentRow = currentlyDisplayedScientist.size();
+
+            ui->tableWidgetScientists->setItem(currentRow, 0, new QTableWidgetItem(scientistname));
+            ui->tableWidgetScientists->setItem(currentRow, 1, new QTableWidgetItem(scientistsex));
+            ui->tableWidgetScientists->setItem(currentRow, 2, new QTableWidgetItem(scientistborn));
+            ui->tableWidgetScientists->setItem(currentRow, 3, new QTableWidgetItem(scientistdied));
+
+            currentlyDisplayedScientist.push_back(currentScience);
+        }
+
+
+
+}
+
+/*void MainWindow::on_pushButton_clicked()
+{
+    /*string userinput = ui->SearchScientist->text().toStdString();
+
+    vector<Scientist> scifie =  ScientistService.searchForScientists(userinput,"name",true);
+
+    displayScientistTable(scifie);
+}*/

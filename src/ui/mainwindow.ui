@@ -50,6 +50,25 @@
          </layout>
         </item>
         <item>
+         <widget class="QLineEdit" name="SearchScientist">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="inputMask">
+           <string/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Search Scientists</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="formLayout"/>
+        </item>
+        <item>
          <widget class="QTableWidget" name="tableWidgetScientists">
           <property name="sortingEnabled">
            <bool>true</bool>
@@ -63,6 +82,13 @@
         <string>Computers</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLineEdit" name="SearchComputers">
+          <property name="placeholderText">
+           <string>Search Computers</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QTableWidget" name="tableWidgetComputers">
           <property name="sortingEnabled">
@@ -82,7 +108,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
