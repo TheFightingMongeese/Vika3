@@ -31,6 +31,8 @@ namespace utils {
 
     std::string sexToString(sexType type);
 
+    std::string typeToString(computerType type);
+
 
     QSqlDatabase getDatabaseConnection();
 }

@@ -76,7 +76,7 @@ void MainWindow::displayComputerTable()
         Computer c = computers.at(i);
         QString computerID = QString::number(c.getId());
         QString name = QString::fromStdString(c.getName());
-        QString type = QString::fromStdString(c.getType());
+        QString type = QString::fromStdString(c.getTypeAsString());
         QString yearBuilt = QString::number(c.getYearBuilt());
 
         qDebug() << computerID << name;
