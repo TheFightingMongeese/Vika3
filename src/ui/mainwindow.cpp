@@ -106,6 +106,20 @@ void MainWindow::on_Tabs_currentChanged(int index)
 }
 
 
+void MainWindow::on_btnAddScientist_clicked()
+{
+    EditScientist *addScientist = new EditScientist();
+
+    Scientist s("jon", sexType(0), 1900, 2000);
+    addScientist->setScientist(s);
+
+    if(addScientist->exec())
+    {
+        qDebug() << QString::fromStdString(addScientist->getScientist().getName());
+        _scientistService.addScientist(addScientist->getScientist());
+        displayScientistTable();
+    }
+}
 
 void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
 {
@@ -169,4 +183,3 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
 
     displayScientistTable(scifie);
 }*/
-}
