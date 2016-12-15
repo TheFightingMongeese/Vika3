@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <vector>
 
+#include "ui/editscientist.h"
 #include "models/computer.h"
 #include "models/scientist.h"
 #include "services/computerservice.h"
@@ -24,7 +25,7 @@ public:
 private slots:
     void on_Tabs_currentChanged(int index);
 
-
+    void on_btnAddScientist_clicked();
 
 private:
     Ui::MainWindow *ui;
