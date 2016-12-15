@@ -32,6 +32,8 @@ private slots:
 
 
 
+    void on_SearchComputers_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     ScientistService _scientistService;

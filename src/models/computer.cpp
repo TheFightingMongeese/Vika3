@@ -23,7 +23,7 @@ Computer::Computer(string name, enum computerType type, int yearBuilt)
     this->yearBuilt = yearBuilt;
 }
 
-Computer::Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt)
+Computer::Computer(unsigned int id, string name, enum computerType type, int yearBuilt)
 {
     this->id = id;
     this->name = name;

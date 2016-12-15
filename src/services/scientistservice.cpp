@@ -1,4 +1,5 @@
 #include "scientistservice.h"
+#include "utilities/utils.h"
 
 #include <algorithm>
 
@@ -9,13 +10,14 @@ ScientistService::ScientistService()
 
 }
 
-std::vector<Scientist> ScientistService::getAllScientists(string orderBy, bool orderAscending)
+vector<Scientist> ScientistService::getAllScientists(string orderBy, bool orderAscending)
 {
     return scientistRepo.getAllScientists(orderBy, orderAscending);
 }
 
-std::vector<Scientist> ScientistService::searchForScientists(string searchTerm)
+vector<Scientist> ScientistService::searchForScientists(string searchTerm)
 {
+
     return scientistRepo.searchForScientists(searchTerm);
 }
 

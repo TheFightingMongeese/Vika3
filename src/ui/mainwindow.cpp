@@ -109,6 +109,90 @@ void MainWindow::on_Tabs_currentChanged(int index)
 
 void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
 {
+    //QString scientists;
+    string sci = arg1.toStdString();
+    vector<Scientist> scientists = _scientistService.searchForScientists(sci);
+
+    QTableWidget *table = ui->tableWidgetScientists;
+    table->clear();
+
+    QStringList tableHeader;
+    tableHeader << "ID" << "Name" << "Gender" << "Year born" << "Year of death";
+    table->setColumnCount(tableHeader.size());
+    table->setRowCount(scientists.size());
+    table->setHorizontalHeaderLabels(tableHeader);
+
+    for(unsigned int i = 0; i < scientists.size(); i++)
+    {
+        Scientist s = scientists.at(i);
+        QString scientistID = QString::number(s.getId());
+        QString name = QString::fromStdString(s.getName());
+        QString sexType = QString::fromStdString(utils::sexToString(s.getSex()));
+        QString yearBorn = QString::number(s.getYearBorn());
+        QString yearDied = QString::number(s.getYearDied());
+
+
+        qDebug() << scientistID << name;
+
+        table->setItem(i, 0, new NumberWidgetItem(scientistID));
+        table->setItem(i, 1, new QTableWidgetItem(name));
+        table->setItem(i, 2, new QTableWidgetItem(sexType));
+        table->setItem(i, 3, new QTableWidgetItem(yearBorn));
+        table->setItem(i, 4, new QTableWidgetItem(yearDied));
+    }
+    /*if(scientists.size() > 0)
+    {
+        for(int i = 0; i < scientists.size(); i++)
+        {
+            qDebug() << scientists.size();
+            Scientist s = scientists[i];
+            qDebug() << QString::fromStdString(s.getName());
+        }
+
+        for(unsigned int y = 0; y < s; y++)
+        {
+
+            stringstream sqlQuery;
+            sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << sci << "%";
+
+        }
+
+    }*/
+
+    // Vantar foorloopu til að spóla í gegnum nöfnin
+
+
+    /*vector<Scientist> scientists;
+
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return scientists;
+    }
+
+    QSqlQuery query(db);
+
+    if (!query.exec(arg1))
+    {
+        return scientists;
+    }
+    while(query.next())
+    {*/
+        // setja inn value
+        //int id = query.value("id").toUInt();
+        // nafn
+        // kyn
+        // fæðingarár
+        // dánarár
+        // cout nafnið
+        // push to stack allar breytur
+     /*   qDebug() << 'arg ' << arg1;
+    }*/
+
+    /*QSqlQuery query(db);
+    query.exec("SELECT FROM scientists WHERE name LIKE %arg1%");*/   // SQL Search skipunin
+
     //QLineEdit::text();
 
     //ui->QLineEdit::text();
@@ -127,7 +211,7 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
     // endir sem semi virkar
    // query.exec("SELECT FROM scientists WHERE name LIKE %input%");     // SQL Search skipunin
 
-    ui->tableWidgetScientists->clearContents();
+    /*ui->tableWidgetScientists->clearContents();
 
     ui->tableWidgetScientists->setRowCount(currentScientist.size());
 
@@ -142,7 +226,7 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
         if(currentScience.contains(searchString))
         {
             QString scientistname = QString::fromStdString(currentScience.getName());
-            QString scientistsex = QString::fromStdString(currentScience.getSex());
+            //QString scientistsex = QString::fromStdString(currentScience.getSex());
             QString scientistborn = QString::fromStdString(std::to_string(currentScience.getYearBorn()));
             QString scientistdied = QString::fromStdString(std::to_string(currentScience.getYearDied()));
 
@@ -150,16 +234,19 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
             int currentRow = currentlyDisplayedScientist.size();
 
             ui->tableWidgetScientists->setItem(currentRow, 0, new QTableWidgetItem(scientistname));
-            ui->tableWidgetScientists->setItem(currentRow, 1, new QTableWidgetItem(scientistsex));
+        //    ui->tableWidgetScientists->setItem(currentRow, 1, new QTableWidgetItem(scientistsex));
             ui->tableWidgetScientists->setItem(currentRow, 2, new QTableWidgetItem(scientistborn));
             ui->tableWidgetScientists->setItem(currentRow, 3, new QTableWidgetItem(scientistdied));
 
             currentlyDisplayedScientist.push_back(currentScience);
+
+
         }
 
 
 
-}
+
+}*/
 
 /*void MainWindow::on_pushButton_clicked()
 {
@@ -169,4 +256,40 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
 
     displayScientistTable(scifie);
 }*/
+}
+
+void MainWindow::on_SearchComputers_textEdited(const QString &arg1)
+{
+    qDebug() << arg1;
+    string comp = arg1.toStdString();
+    vector<Computer> computers = _computerService.searchForComputers(comp);
+
+    QTableWidget *table = ui->tableWidgetComputers;
+    table->clear();
+
+    QStringList tableHeader;
+    tableHeader << "ID" << "Name" << "Type" << "Year of build";
+    table->setColumnCount(tableHeader.size());
+    table->setRowCount(computers.size());
+    table->setHorizontalHeaderLabels(tableHeader);
+
+    qDebug() << computers.size();
+
+    for(unsigned int i = 0; i < computers.size(); i++)
+    {
+        qDebug() << computers.size();
+        Computer c = computers.at(i);
+        QString computerID = QString::number(c.getId());
+        QString name = QString::fromStdString(c.getName());
+        QString type = QString::fromStdString(c.getTypeAsString());
+        QString yearBuilt = QString::number(c.getYearBuilt());
+
+
+        qDebug() << computerID << name;
+
+        table->setItem(i, 0, new NumberWidgetItem(computerID));
+        table->setItem(i, 1, new QTableWidgetItem(name));
+        table->setItem(i, 2, new QTableWidgetItem(type));
+        table->setItem(i, 3, new QTableWidgetItem(yearBuilt));
+    }
 }
