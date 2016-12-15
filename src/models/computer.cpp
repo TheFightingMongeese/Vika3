@@ -53,15 +53,15 @@ enum computerType Computer::getType()
 
 std::string Computer::getTypeAsString()
 {
-    if (type == computerType::electronic)
+    if (type == computerType::Electronic)
     {
         return "Electronic";
     }
-    else if (type == computerType::mechanical)
+    else if (type == computerType::Mechanical)
     {
         return "Mechanical";
     }
-    else if (type == computerType::transistor)
+    else if (type == computerType::Transistor)
     {
         return "Transistor";
     }
