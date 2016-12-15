@@ -24,10 +24,36 @@ bool LinkRepository::addLink(string scientistId, string computerId)
     QSqlQuery query(db);
 
     stringstream sqlQuery;
-    sqlQuery << "INSERT INTO ScientistComputerConnections (scientistId, computerId) VALUES ("
+    sqlQuery << "INSERT INTO relations (scientistId, computerId) VALUES ("
              << "'" << scientistId << "', "
              << "'" << computerId << "'"
              << ")";
+
+    if (!query.exec(QString::fromStdString(sqlQuery.str())))
+    {
+        return false;
+    }
+
+    db.close();
+
+    return true;
+}
+
+bool LinkRepository::removeLink(string scientistId, string computerId)
+{
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return false;
+    }
+
+    QSqlQuery query(db);
+
+    stringstream sqlQuery;
+    sqlQuery << "DELETE FROM relations WHERE "
+             << "scientistId = '" << scientistId << "' AND "
+             << "computerId = '" << computerId << "'";
 
     if (!query.exec(QString::fromStdString(sqlQuery.str())))
     {

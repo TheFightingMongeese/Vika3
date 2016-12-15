@@ -21,6 +21,14 @@ public:
      * @return true if it was a success, false if it was a failure
      */
     bool addLink(std::string scientistId, std::string computerId);
+
+    /**
+     * @brief removeLink removes a link between scientist and computer to the database
+     * @param scientistId The scientist id to connect to
+     * @param computerId The computer id to connect to
+     * @return true if it was a success, false if it was a failure
+     */
+    bool removeLink(std::string scientistId, std::string computerId);
 private:
     QSqlDatabase db;
 };
