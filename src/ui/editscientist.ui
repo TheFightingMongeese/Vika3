@@ -10,16 +10,22 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>220</y>
-     <width>164</width>
-     <height>16</height>
+     <x>130</x>
+     <y>230</y>
+     <width>211</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="standardButtons">
@@ -30,24 +36,131 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>100</y>
-     <width>113</width>
-     <height>20</height>
+     <y>30</y>
+     <width>191</width>
+     <height>31</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="labelName">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>80</y>
-     <width>35</width>
-     <height>10</height>
+     <x>10</x>
+     <y>30</y>
+     <width>51</width>
+     <height>41</height>
     </rect>
    </property>
-   <property name="text">
-    <string>TextLabel</string>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
+   <property name="text">
+    <string>Name</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelGender">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Gender</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditBirth">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditDeath">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>180</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelBirth">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Year of birth</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelDeath">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Year of death</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBoxGender">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>80</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Female</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Male</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
