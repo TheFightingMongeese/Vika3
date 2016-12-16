@@ -110,8 +110,11 @@ void MainWindow::on_btnAddScientist_clicked()
 {
     EditScientist *addScientist = new EditScientist();
 
-    Scientist s("jon", sexType(0), 1900, 2000);
-    addScientist->setScientist(s);
+    //Scientist s(name, sex, yearBorn, yearDied);
+    //Scientist* s = new Scientist(s->name, s->sex, s->yearBorn, s->yearDied);
+
+
+    addScientist->setScientist();
 
     if(addScientist->exec())
     {
@@ -123,24 +126,6 @@ void MainWindow::on_btnAddScientist_clicked()
 
 void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
 {
-    //QLineEdit::text();
-
-    //ui->QLineEdit::text();
-
- // ui->SearchScientist->clear();
-
-   /* for(unsigned int i = 0; i < Scientist.size();i++)
-    {
-        Scientist currentScientists = scientists.at(i);
-        ui->displayScientistTable->addItem(QString::fromStdString(currentScientists.getName()));
-    }*/
-  //  QString input = ui->SearchScientist->text();
-   // vector<Scientist> scientistVector;                                       byrjun sem semi virkar
-    //scientistVector = _scientistService.searchForScientists("Dennis");
-    //ui->tableWidgetScientists->setItem(0,1,new QTableWidgetItem(QString::fromStdString(scientistVector[0].getName())));
-    // endir sem semi virkar
-   // query.exec("SELECT FROM scientists WHERE name LIKE %input%");     // SQL Search skipunin
-
     ui->tableWidgetScientists->clearContents();
 
     ui->tableWidgetScientists->setRowCount(currentScientist.size());
@@ -156,7 +141,7 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
         if(currentScience.contains(searchString))
         {
             QString scientistname = QString::fromStdString(currentScience.getName());
-            QString scientistsex = QString::fromStdString(currentScience.getSex());
+            QString scientistsex = QString::fromStdString(currentScience.getSexAsString());
             QString scientistborn = QString::fromStdString(std::to_string(currentScience.getYearBorn()));
             QString scientistdied = QString::fromStdString(std::to_string(currentScience.getYearDied()));
 
@@ -170,16 +155,27 @@ void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
 
             currentlyDisplayedScientist.push_back(currentScience);
         }
-
-
-
+    }
 }
 
-/*void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_tableWidgetScientists_itemClicked(QTableWidgetItem *item)
 {
-    /*string userinput = ui->SearchScientist->text().toStdString();
+    int rowID = item->row();
 
-    vector<Scientist> scifie =  ScientistService.searchForScientists(userinput,"name",true);
+    int id = ui->tableWidgetScientists->item(rowID, 0)->text().toInt();
+    string name = ui->tableWidgetScientists->item(rowID, 1)->text().toStdString();
+    sexType gender = sexType(ui->tableWidgetScientists->item(rowID, 2)->text().toInt());
+    int birth = ui->tableWidgetScientists->item(rowID, 3)->text().toInt();
+    int death = ui->tableWidgetScientists->item(rowID, 4)->text().toInt();
 
-    displayScientistTable(scifie);
-}*/
+    Scientist s(id, name, gender, birth, death);
+
+    EditScientist *editScientist = new EditScientist();
+
+    editScientist->setScientist(s);
+
+    editScientist->exec();
+
+    //qDebug() << rowID;
+}

@@ -18,21 +18,32 @@ Scientist EditScientist::getScientist()
     return scientist;
 }
 
+void EditScientist::setScientist()
+{
+    this->setWindowTitle("Add");
+}
+
 void EditScientist::setScientist(Scientist s)
 {
     scientist = s;
+    this->setWindowTitle("Edit");
 
     ui->lineEditName->setText(QString::fromStdString(s.getName()));
+    ui->comboBoxGender->setCurrentIndex(s.getSex());
+    ui->lineEditBirth->setText(QString::number(s.getYearBorn()));
+    ui->lineEditDeath->setText(QString::number(s.getYearDied()));
+
+
 }
 
 void EditScientist::on_buttonBox_accepted()
 {
+    int genderID = ui->comboBoxGender->currentIndex();
     std::string name = ui->lineEditName->text().toStdString();
-    sexType gender = sexType(0);
-    //QLineEdit birth = ui->lineEditBirth->int().toStdString();
-    //death = ui->lineEditDeath->int();
-    int birth = 1000 ;
-    int death = 2000;
+    sexType gender = sexType(genderID);
+    int birth = ui->lineEditBirth->text().toInt();
+    int death = ui->lineEditDeath->text().toInt();
+
 
     Scientist scientist2(name, gender, birth, death);
     scientist = scientist2;
