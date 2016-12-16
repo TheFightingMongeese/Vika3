@@ -32,7 +32,7 @@ private slots:
 
     void on_SearchScientist_textEdited(const QString &arg1);
 
-
+    void on_SearchComputers_textEdited(const QString &arg1);
 
     void on_tableWidgetScientists_itemClicked(QTableWidgetItem *item);
 
@@ -45,7 +45,7 @@ private:
     std::vector<Scientist> currentlyDisplayedScientist;
 
     void displayScientistTable(QString filter = "");
-    void displayComputerTable();
+    void displayComputerTable(QString filter = "");
 };
 
 #endif // MAINWINDOW_H
