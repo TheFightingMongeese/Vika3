@@ -11,6 +11,7 @@
 #include "models/scientist.h"
 #include "services/computerservice.h"
 #include "services/scientistservice.h"
+#include "services/linkservice.h"
 
 using namespace std;
 
@@ -43,14 +44,21 @@ private slots:
 
 
 
+
     void on_tableWidgetScientists_clicked(const QModelIndex &index);
 
     void on_btnRemoveScientist_clicked();
+
+    void on_tableWidgetRelations_itemClicked(QTableWidgetItem *item);
+
+    void on_tableWidgetRelations_activated(const QModelIndex &index);
+
 
 private:
     Ui::MainWindow *ui;
     ScientistService _scientistService;
     ComputerService _computerService;
+    LinkService _linkService;
 
     std::vector<Scientist> currentScientist;
     std::vector<Scientist> currentlyDisplayedScientist;
@@ -60,6 +68,7 @@ private:
 
     void displayScientistTable(QString filter = "");
     void displayComputerTable(QString filter = "");
+    void displayRelationsTable(QString filter = "");
 };
 
 #endif // MAINWINDOW_H

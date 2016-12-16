@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     ui/mainwindow.cpp \
     ui/numberwidgetitem.cpp \
     ui/editscientist.cpp \
-    ui/editcomputer.cpp
+    ui/editcomputer.cpp \
+    models/relation.cpp
 
 HEADERS += \
     models/scientist.h \
@@ -35,7 +36,8 @@ HEADERS += \
     ui/mainwindow.h \
     ui/editscientist.h \
     ui/numberwidgetitem.h \
-    ui/editcomputer.h
+    ui/editcomputer.h \
+    models/relation.h
 
 DISTFILES += \
     database.sqlite

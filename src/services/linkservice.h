@@ -27,6 +27,7 @@ public:
      * @return true if it was a success, false if it was a failure
      */
     bool removeLink(QString scientistId, QString computerId);
+    std::vector<Relation> GetAllLinks();
 private:
     LinkRepository linkRepo;
 };

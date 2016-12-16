@@ -105,6 +105,50 @@ void MainWindow::displayComputerTable(QString filter)
      }
 }
 
+void MainWindow::displayRelationsTable(QString filter)
+{
+
+    std::vector<Relation> relations;
+
+    if(filter.isEmpty())
+    {
+
+        relations = _linkService.GetAllLinks();
+    }
+    else
+    {
+
+    }
+
+    QTableWidget *table = ui->tableWidgetRelations;
+    table->clear();
+
+    QStringList tableHeader;
+    tableHeader << "Scientist" << "Computer";
+    table->setColumnCount(tableHeader.size());
+    table->setRowCount(relations.size());
+    table->setHorizontalHeaderLabels(tableHeader);
+
+    if(relations.size() > 0)
+    {
+        for(unsigned int i = 0; i < relations.size(); i++)
+        {
+            Relation r = relations.at(i);
+
+            QString scientistID = QString::number(r.getScientist().getId());
+            QString name = r.getScientist().getName();
+            QString computerID = QString::number(r.getComputer().getId());
+            QString type = r.getComputer().getName();
+
+
+            qDebug() << scientistID << name << computerID << type;
+
+            table->setItem(i, 0, new QTableWidgetItem(name));
+            table->setItem(i, 1, new QTableWidgetItem(type));
+
+        }
+     }
+}
 void MainWindow::on_Tabs_currentChanged(int index)
 {
     switch(index)
@@ -114,6 +158,9 @@ void MainWindow::on_Tabs_currentChanged(int index)
         break;
     case 1:
         displayComputerTable();
+        break;
+    case 2:
+        displayRelationsTable();
         break;
     }
 
@@ -195,6 +242,7 @@ void MainWindow::on_btnAddComputer_clicked()
 
 
 
+
 void MainWindow::on_btnRemoveScientist_clicked()
 {
     int currentlySelectedScientistIndex = ui->tableWidgetScientists->currentIndex().row();
@@ -219,4 +267,13 @@ void MainWindow::on_btnRemoveScientist_clicked()
 void MainWindow::on_tableWidgetScientists_clicked(const QModelIndex &index)
 {
     ui->btnRemoveScientist->setEnabled(true);
+}
+void MainWindow::on_tableWidgetRelations_itemClicked(QTableWidgetItem *item)
+{
+
+}
+
+void MainWindow::on_tableWidgetRelations_activated(const QModelIndex &index)
+{
+    displayRelationsTable();
 }

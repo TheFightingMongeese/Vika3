@@ -14,7 +14,11 @@ Computer::Computer(QString name, enum computerType type)
     this->type = type;
     this->yearBuilt = 0;
 }
-
+Computer::Computer(unsigned int id, QString name)
+{
+    this->id = id;
+    this->name = name;
+}
 Computer::Computer(QString name, enum computerType type, int yearBuilt)
 {
     id = 0;

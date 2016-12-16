@@ -1,6 +1,7 @@
 #ifndef LINKREPOSITORY_H
 #define LINKREPOSITORY_H
 
+#include "models/relation.h"
 #include <QtSql>
 #include <vector>
 #include <string>
@@ -29,6 +30,7 @@ public:
      * @return true if it was a success, false if it was a failure
      */
     bool removeLink(QString scientistId, QString computerId);
+    std::vector<Relation> getAllRelations();
 private:
     QSqlDatabase db;
 };
