@@ -12,7 +12,7 @@ LinkRepository::LinkRepository()
     db = utils::getDatabaseConnection();
 }
 
-bool LinkRepository::addLink(string scientistId, string computerId)
+bool LinkRepository::addLink(QString scientistId, QString computerId)
 {
     db.open();
 
@@ -25,8 +25,8 @@ bool LinkRepository::addLink(string scientistId, string computerId)
 
     stringstream sqlQuery;
     sqlQuery << "INSERT INTO relations (scientistId, computerId) VALUES ("
-             << "'" << scientistId << "', "
-             << "'" << computerId << "'"
+             << "'" << scientistId.toStdString() << "', "
+             << "'" << computerId.toStdString() << "'"
              << ")";
 
     if (!query.exec(QString::fromStdString(sqlQuery.str())))
@@ -39,7 +39,7 @@ bool LinkRepository::addLink(string scientistId, string computerId)
     return true;
 }
 
-bool LinkRepository::removeLink(string scientistId, string computerId)
+bool LinkRepository::removeLink(QString scientistId, QString computerId)
 {
     db.open();
 
@@ -52,8 +52,8 @@ bool LinkRepository::removeLink(string scientistId, string computerId)
 
     stringstream sqlQuery;
     sqlQuery << "DELETE FROM relations WHERE "
-             << "scientistId = '" << scientistId << "' AND "
-             << "computerId = '" << computerId << "'";
+             << "scientistId = '" << scientistId.toStdString() << "' AND "
+             << "computerId = '" << computerId.toStdString() << "'";
 
     if (!query.exec(QString::fromStdString(sqlQuery.str())))
     {

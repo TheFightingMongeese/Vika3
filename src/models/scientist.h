@@ -1,7 +1,7 @@
 #ifndef SCIENTIST_H
 #define SCIENTIST_H
 
-#include <string>
+#include <QString>
 #include <vector>
 
 /**
@@ -21,26 +21,26 @@ class Scientist
 public:
     Scientist();
     ~Scientist();
-    Scientist(std::string name, sexType sex, int yearBorn);
-    Scientist(std::string name, sexType sex, int yearBorn, int yearDied);
-    Scientist(unsigned int id, std::string name, sexType sex, int yearBorn, int yearDied);
+    Scientist(QString name, sexType sex, int yearBorn);
+    Scientist(QString name, sexType sex, int yearBorn, int yearDied);
+    Scientist(unsigned int id, QString name, sexType sex, int yearBorn, int yearDied);
     unsigned int getId();
-    std::string getName() const;
+    QString getName() const;
     enum sexType getSex() const;
-    std::string getSexAsString();
+    QString getSexAsString();
     int getYearBorn() const;
     int getYearDied() const;
     std::vector<Computer*> getComputers() const;
 
     void setComputers(std::vector<Computer> computers);
 
-    bool contains(std::string searchTerm);
+    bool contains(QString searchTerm);
 
 private:
     void destroyComputers();
 
     unsigned int id;
-    std::string name;
+    QString name;
     sexType sex;
     int yearBorn;
     int yearDied;

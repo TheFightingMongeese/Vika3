@@ -9,12 +9,12 @@ LinkService::LinkService()
 
 }
 
-bool LinkService::addLink(string scientistId, string computerId)
+bool LinkService::addLink(QString scientistId, QString computerId)
 {
     return linkRepo.addLink(scientistId, computerId);
 }
 
-bool LinkService::removeLink(string scientistId, string computerId)
+bool LinkService::removeLink(QString scientistId, QString computerId)
 {
     return linkRepo.removeLink(scientistId, computerId);
 }

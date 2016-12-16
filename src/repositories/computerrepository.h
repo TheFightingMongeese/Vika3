@@ -18,14 +18,14 @@ public:
      * @brief getAllComputers fetches all computers from the database
      * @return a vector containing all computers in the database
      */
-    std::vector<Computer> getAllComputers(std::string orderBy, bool orderAscending);
+    std::vector<Computer> getAllComputers(QString orderBy, bool orderAscending);
 
     /**
      * @brief searchForComputers fetches all computers from the database and filters them on searchTerm
      * @param searchTerm Contains the input that the user wishes to filter on
      * @return a vector of computers filtered by searchTerm
      */
-    std::vector<Computer> searchForComputers(std::string searchTerm);
+    std::vector<Computer> searchForComputers(QString searchTerm);
 
     /**
      * @brief addComputer saves a computer model to the database

@@ -15,23 +15,23 @@
  */
 
 namespace utils {
-    std::vector<std::string> split(std::string line, char delimeter);
+    std::vector<QString> split(QString line, char delimeter);
 
-    int stringToInt(std::string str);
+    int stringToInt(QString str);
 
-    std::string stringToLower(std::string str);
+    QString stringToLower(QString str);
 
-    std::string intToString(int number);
+    QString intToString(int number);
 
     enum sexType intToSex(int number);
 
     enum computerType intToComputerType(int number);
 
-    enum sexType stringToSex(std::string str);
+    enum sexType stringToSex(QString str);
 
-    std::string sexToString(sexType type);
+    QString sexToString(sexType type);
 
-    std::string typeToString(computerType type);
+    QString typeToString(computerType type);
 
 
     QSqlDatabase getDatabaseConnection();

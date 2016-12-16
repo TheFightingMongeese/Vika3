@@ -29,7 +29,7 @@ vector<Computer> ComputerRepository::queryComputers(QString sqlQuery)
     while (query.next())
     {
         int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
+        QString name = query.value("name").toString();
         enum computerType type = utils::intToComputerType(query.value("computerType").toInt());
         int yearBuilt = query.value("yearBuilt").toInt();
 
@@ -46,24 +46,24 @@ vector<Computer> ComputerRepository::queryComputers(QString sqlQuery)
     return computers;
 }
 
-vector<Computer> ComputerRepository::getAllComputers(string orderBy, bool orderAscending)
+vector<Computer> ComputerRepository::getAllComputers(QString orderBy, bool orderAscending)
 {
     string ascending = ((orderAscending) ? "ASC" : "DESC");
 
     stringstream sqlQuery;
-    sqlQuery << "SELECT * FROM Computers ORDER BY " << orderBy << " " << ascending;
+    sqlQuery << "SELECT * FROM Computers ORDER BY " << orderBy.toStdString() << " " << ascending;
 
     return queryComputers(QString::fromStdString(sqlQuery.str()));
 }
 
-vector<Computer> ComputerRepository::searchForComputers(string searchTerm)
+vector<Computer> ComputerRepository::searchForComputers(QString searchTerm)
 {
     stringstream sqlQuery;
-    sqlQuery << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm << "%"
+    sqlQuery << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm.toStdString() << "%"
            << "' UNION "
-           << "SELECT * FROM Computers WHERE computerType LIKE '%" << searchTerm << "%"
+           << "SELECT * FROM Computers WHERE computerType LIKE '%" << searchTerm.toStdString() << "%"
            << "' UNION "
-           << "SELECT * FROM Computers WHERE yearBuilt LIKE '%" << searchTerm << "%'";
+           << "SELECT * FROM Computers WHERE yearBuilt LIKE '%" << searchTerm.toStdString() << "%'";
 
     return queryComputers(QString::fromStdString(sqlQuery.str()));
 }
@@ -81,7 +81,7 @@ bool ComputerRepository::addComputer(Computer computer)
 
     stringstream sqlQuery;
     sqlQuery << "INSERT INTO Computers (name, computerType, yearBuilt) VALUES ("
-             << "'" << computer.getName() << "', "
+             << "'" << computer.getName().toStdString() << "', "
              << computer.getType() << ", "
              << computer.getYearBuilt()
              << ")";
@@ -120,7 +120,7 @@ std::vector<Scientist> ComputerRepository::queryScientistsByComputer(Computer co
     while (query.next())
     {
         int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
+        QString name = query.value("name").toString();
         enum sexType sex = utils::intToSex(query.value("sex").toInt());
         int yearBorn = query.value("yearBorn").toInt();
         int yearDied = query.value("yearDied").toInt();

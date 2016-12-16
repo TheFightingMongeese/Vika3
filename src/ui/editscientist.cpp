@@ -27,7 +27,7 @@ void EditScientist::setScientist(Scientist s)
 {
     scientist = s;
     this->setWindowTitle("Edit");
-    ui->lineEditName->setText(QString::fromStdString(s.getName()));
+    ui->lineEditName->setText(s.getName());
     ui->comboBoxGender->setCurrentIndex(s.getSex());
     ui->lineEditBirth->setText(QString::number(s.getYearBorn()));
     ui->lineEditDeath->setText(QString::number(s.getYearDied()));
@@ -36,7 +36,7 @@ void EditScientist::setScientist(Scientist s)
 void EditScientist::on_buttonBox_accepted()
 {
     int genderID = ui->comboBoxGender->currentIndex();
-    std::string name = ui->lineEditName->text().toStdString();
+    QString name = ui->lineEditName->text();
 
     sexType gender = sexType(genderID);
     int birth = ui->lineEditBirth->text().toInt();

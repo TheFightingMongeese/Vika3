@@ -33,7 +33,7 @@ vector<Scientist> ScientistRepository::queryScientists(QString sqlQuery)
     while (query.next())
     {
         int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
+        QString name = query.value("name").toString();
         enum sexType sex = utils::intToSex(query.value("sex").toInt());
         int yearBorn = query.value("yearBorn").toInt();
         int yearDied = query.value("yearDied").toInt();
@@ -52,24 +52,24 @@ vector<Scientist> ScientistRepository::queryScientists(QString sqlQuery)
     return scientists;
 }
 
-vector<Scientist> ScientistRepository::getAllScientists(string orderBy, bool orderAscending)
+vector<Scientist> ScientistRepository::getAllScientists(QString orderBy, bool orderAscending)
 {
     string ascending = ((orderAscending) ? "ASC" : "DESC");
 
     stringstream sqlQuery;
-    sqlQuery << "SELECT * FROM Scientists ORDER BY " << orderBy << " " << ascending;
+    sqlQuery << "SELECT * FROM Scientists ORDER BY " << orderBy.toStdString() << " " << ascending;
 
     return queryScientists(QString::fromStdString(sqlQuery.str()));
 }
 
-vector<Scientist> ScientistRepository::searchForScientists(string searchTerm)
+vector<Scientist> ScientistRepository::searchForScientists(QString searchTerm)
 {
     stringstream sqlQuery;
-    sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << searchTerm << "%"
+    sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << searchTerm.toStdString() << "%"
            << "' UNION "
-           << "SELECT * FROM Scientists WHERE yearBorn LIKE '%" << searchTerm << "%"
+           << "SELECT * FROM Scientists WHERE yearBorn LIKE '%" << searchTerm.toStdString() << "%"
            << "' UNION "
-           << "SELECT * FROM Scientists WHERE yearDied LIKE '%" << searchTerm << "%'";
+           << "SELECT * FROM Scientists WHERE yearDied LIKE '%" << searchTerm.toStdString() << "%'";
 
     return queryScientists(QString::fromStdString(sqlQuery.str()));
 }
@@ -87,7 +87,7 @@ bool ScientistRepository::addScientist(Scientist scientist)
 
     stringstream sqlQuery;
     sqlQuery << "INSERT INTO Scientists (name, sex, yearBorn, yearDied) VALUES ("
-             << "'" << scientist.getName() << "', "
+             << "'" << scientist.getName().toStdString() << "', "
              << scientist.getSex() << ", "
              << scientist.getYearBorn() << ", "
              << scientist.getYearDied()
@@ -127,7 +127,7 @@ std::vector<Computer> ScientistRepository::queryComputersByScientist(Scientist s
     while (query.next())
     {
         int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
+        QString name = query.value("name").toString();
         enum computerType type = utils::intToComputerType(query.value("type").toInt());
         int yearBuilt = query.value("yearBuilt").toInt();
 
