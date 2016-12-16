@@ -23,6 +23,7 @@ class Computer
 public:
     Computer();
     Computer(QString name, enum computerType type);
+    Computer(unsigned int id, QString name);
     Computer(QString name, enum computerType type, int yearBuilt);
     Computer(unsigned int id, QString name, enum computerType type, int yearBuilt);
 

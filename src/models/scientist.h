@@ -24,6 +24,7 @@ public:
     Scientist(QString name, sexType sex, int yearBorn);
     Scientist(QString name, sexType sex, int yearBorn, int yearDied);
     Scientist(unsigned int id, QString name, sexType sex, int yearBorn, int yearDied);
+    Scientist(unsigned int id, QString name);
     unsigned int getId();
     QString getName() const;
     enum sexType getSex() const;

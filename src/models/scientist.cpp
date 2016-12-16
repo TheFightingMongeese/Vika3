@@ -20,7 +20,10 @@ Scientist::Scientist(QString name, enum sexType sex, int yearBorn){
     this->yearBorn = yearBorn;
     this->yearDied = 0;
 }
-
+Scientist::Scientist(unsigned int id, QString name){
+    this->id = id;
+    this->name = name;
+}
 Scientist::Scientist(QString name, enum sexType sex, int yearBorn, int yearDied)
 {
     id = 0;

@@ -18,3 +18,7 @@ bool LinkService::removeLink(QString scientistId, QString computerId)
 {
     return linkRepo.removeLink(scientistId, computerId);
 }
+std::vector<Relation> LinkService::GetAllLinks()
+{
+    return linkRepo.getAllRelations();
+}
