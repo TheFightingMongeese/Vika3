@@ -61,7 +61,7 @@ vector<Computer> ComputerRepository::searchForComputers(string searchTerm)
     stringstream sqlQuery;
     sqlQuery << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm << "%"
            << "' UNION "
-           << "SELECT * FROM Computers WHERE type LIKE '%" << searchTerm << "%"
+           << "SELECT * FROM Computers WHERE computerType LIKE '%" << searchTerm << "%"
            << "' UNION "
            << "SELECT * FROM Computers WHERE yearBuilt LIKE '%" << searchTerm << "%'";
 
