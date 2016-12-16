@@ -18,8 +18,9 @@ SOURCES += main.cpp \
     services/computerservice.cpp \
     services/linkservice.cpp \
     ui/mainwindow.cpp \
+    ui/numberwidgetitem.cpp \
     ui/editscientist.cpp \
-    ui/numberwidgetitem.cpp
+    ui/editcomputer.cpp
 
 HEADERS += \
     models/scientist.h \
@@ -33,11 +34,13 @@ HEADERS += \
     services/linkservice.h \
     ui/mainwindow.h \
     ui/editscientist.h \
-    ui/numberwidgetitem.h
+    ui/numberwidgetitem.h \
+    ui/editcomputer.h
 
 DISTFILES += \
     database.sqlite
 
 FORMS += \
     ui/mainwindow.ui \
-    ui/editscientist.ui
+    ui/editscientist.ui \
+    ui/editcomputer.ui

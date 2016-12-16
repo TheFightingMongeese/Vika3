@@ -143,19 +143,52 @@ void MainWindow::on_SearchComputers_textEdited(const QString &filter)
     displayComputerTable(filter);
 }
 
-void MainWindow::on_tableWidgetScientists_itemClicked(QTableWidgetItem *item)
+void MainWindow::on_tableWidgetScientists_itemDoubleClicked(QTableWidgetItem *item)
 {
+    QTableWidget *table = ui->tableWidgetScientists;
     int rowID = item->row();
 
-    int id = ui->tableWidgetScientists->item(rowID, 0)->text().toInt();
-    string name = ui->tableWidgetScientists->item(rowID, 1)->text().toStdString();
-    sexType gender = sexType(ui->tableWidgetScientists->item(rowID, 2)->text().toInt());
-    int birth = ui->tableWidgetScientists->item(rowID, 3)->text().toInt();
-    int death = ui->tableWidgetScientists->item(rowID, 4)->text().toInt();
+    int id = table->item(rowID, 0)->text().toInt();
+    string name = table->item(rowID, 1)->text().toStdString();
+    sexType gender = sexType(table->item(rowID, 2)->text().toInt());
+    int birth = table->item(rowID, 3)->text().toInt();
+    int death = table->item(rowID, 4)->text().toInt();
 
     Scientist s(id, name, gender, birth, death);
     EditScientist *editScientist = new EditScientist();
     editScientist->setScientist(s);
 
     editScientist->exec();
+}
+
+void MainWindow::on_tableWidgetComputers_itemDoubleClicked(QTableWidgetItem *item)
+{
+    QTableWidget *table = ui->tableWidgetComputers;
+    int rowID = item->row();
+
+    int id = table->item(rowID, 0)->text().toInt();
+    string name = table->item(rowID, 1)->text().toStdString();
+    computerType type = computerType(table->item(rowID, 2)->text().toInt());
+    int built = table->item(rowID, 3)->text().toInt();
+
+    Computer c(id, name, type, built);
+    EditComputer *editComputer = new EditComputer();
+    editComputer->setComputer(c);
+
+    editComputer->exec();
+}
+
+
+
+void MainWindow::on_btnAddComputer_clicked()
+{
+    EditComputer *addComputer = new EditComputer();
+    addComputer->setComputer();
+
+    if(addComputer->exec())
+    {
+        qDebug() << QString::fromStdString(addComputer->getComputer().getName());
+        _computerService.addComputer(addComputer->getComputer());
+        displayComputerTable();
+    }
 }
