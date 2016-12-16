@@ -41,40 +41,28 @@ void MainWindow::displayScientistTable(QString filter)
     table->setRowCount(scientists.size());
     table->setHorizontalHeaderLabels(tableHeader);
 
-    if(scientists.size() > 0)
+    for(unsigned int i = 0; i < scientists.size(); i++)
     {
-        for(unsigned int i = 0; i < scientists.size(); i++)
-        {
-            Scientist s = scientists.at(i);
-            QString scientistID = QString::number(s.getId());
-            QString name = QString::fromStdString(s.getName());
-            QString sexType = QString::fromStdString(utils::sexToString(s.getSex()));
-            QString yearBorn = QString::number(s.getYearBorn());
-            QString yearDied = QString::number(s.getYearDied());
+        Scientist s = scientists.at(i);
+        QString scientistID = QString::number(s.getId());
+        QString name = QString::fromStdString(s.getName());
+        QString sexType = QString::fromStdString(utils::sexToString(s.getSex()));
+        QString yearBorn = QString::number(s.getYearBorn());
+        QString yearDied = QString::number(s.getYearDied());
 
 
-            qDebug() << scientistID << name;
+        qDebug() << scientistID << name;
 
-            table->setItem(i, 0, new NumberWidgetItem(scientistID));
-            table->setItem(i, 1, new QTableWidgetItem(name));
-            table->setItem(i, 2, new QTableWidgetItem(sexType));
-            table->setItem(i, 3, new QTableWidgetItem(yearBorn));
-            table->setItem(i, 4, new QTableWidgetItem(yearDied));
-        }
+        table->setItem(i, 0, new NumberWidgetItem(scientistID));
+        table->setItem(i, 1, new QTableWidgetItem(name));
+        table->setItem(i, 2, new QTableWidgetItem(sexType));
+        table->setItem(i, 3, new QTableWidgetItem(yearBorn));
+        table->setItem(i, 4, new QTableWidgetItem(yearDied));
     }
 }
-void MainWindow::displayComputerTable(QString filter)
+void MainWindow::displayComputerTable()
 {
-    std::vector<Computer> computers;
-
-    if(filter.isEmpty())
-    {
-        computers = _computerService.getAllComputers("name", true);
-    }
-    else
-    {
-        computers = _computerService.searchForComputers(filter.toStdString());
-    }
+    std::vector<Computer> computers = _computerService.getAllComputers("name", true);
 
     QTableWidget *table = ui->tableWidgetComputers;
     table->clear();
@@ -85,26 +73,22 @@ void MainWindow::displayComputerTable(QString filter)
     table->setRowCount(computers.size());
     table->setHorizontalHeaderLabels(tableHeader);
 
-    if(computers.size() > 0)
+    for(unsigned int i = 0; i < computers.size(); i++)
     {
+        Computer c = computers.at(i);
+        QString computerID = QString::number(c.getId());
+        QString name = QString::fromStdString(c.getName());
+        QString type = QString::fromStdString(c.getTypeAsString());
+        QString yearBuilt = QString::number(c.getYearBuilt());
 
-        for(unsigned int i = 0; i < computers.size(); i++)
-        {
-            Computer c = computers.at(i);
-            QString computerID = QString::number(c.getId());
-            QString name = QString::fromStdString(c.getName());
-            QString type = QString::fromStdString(c.getTypeAsString());
-            QString yearBuilt = QString::number(c.getYearBuilt());
+        qDebug() << computerID << name;
 
-            qDebug() << computerID << name;
+        table->setItem(i, 0, new NumberWidgetItem(computerID));
+        table->setItem(i, 1, new QTableWidgetItem(name));
+        table->setItem(i, 2, new QTableWidgetItem(type));
+        table->setItem(i, 3, new QTableWidgetItem(yearBuilt));
 
-            table->setItem(i, 0, new NumberWidgetItem(computerID));
-            table->setItem(i, 1, new QTableWidgetItem(name));
-            table->setItem(i, 2, new QTableWidgetItem(type));
-            table->setItem(i, 3, new QTableWidgetItem(yearBuilt));
-
-        }
-     }
+    }
 }
 
 void MainWindow::on_Tabs_currentChanged(int index)
@@ -126,6 +110,10 @@ void MainWindow::on_btnAddScientist_clicked()
 {
     EditScientist *addScientist = new EditScientist();
 
+    //Scientist s(name, sex, yearBorn, yearDied);
+    //Scientist* s = new Scientist(s->name, s->sex, s->yearBorn, s->yearDied);
+
+
     addScientist->setScientist();
 
     if(addScientist->exec())
@@ -133,6 +121,40 @@ void MainWindow::on_btnAddScientist_clicked()
         qDebug() << QString::fromStdString(addScientist->getScientist().getName());
         _scientistService.addScientist(addScientist->getScientist());
         displayScientistTable();
+    }
+}
+
+void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
+{
+    ui->tableWidgetScientists->clearContents();
+
+    ui->tableWidgetScientists->setRowCount(currentScientist.size());
+
+    currentlyDisplayedScientist.clear();
+
+    for(unsigned int i = 0; i < currentScientist.size(); ++i)
+    {
+        Scientist currentScience = currentScientist[i];
+
+        std::string searchString = ui->SearchScientist->text().toStdString();
+
+        if(currentScience.contains(searchString))
+        {
+            QString scientistname = QString::fromStdString(currentScience.getName());
+            QString scientistsex = QString::fromStdString(currentScience.getSexAsString());
+            QString scientistborn = QString::fromStdString(std::to_string(currentScience.getYearBorn()));
+            QString scientistdied = QString::fromStdString(std::to_string(currentScience.getYearDied()));
+
+
+            int currentRow = currentlyDisplayedScientist.size();
+
+            ui->tableWidgetScientists->setItem(currentRow, 0, new QTableWidgetItem(scientistname));
+            ui->tableWidgetScientists->setItem(currentRow, 1, new QTableWidgetItem(scientistsex));
+            ui->tableWidgetScientists->setItem(currentRow, 2, new QTableWidgetItem(scientistborn));
+            ui->tableWidgetScientists->setItem(currentRow, 3, new QTableWidgetItem(scientistdied));
+
+            currentlyDisplayedScientist.push_back(currentScience);
+        }
     }
 }
 
@@ -155,15 +177,5 @@ void MainWindow::on_tableWidgetScientists_itemClicked(QTableWidgetItem *item)
 
     editScientist->exec();
 
-}
-
-void MainWindow::on_SearchComputers_textEdited(const QString &arg1)
-{
-    displayComputerTable(arg1);
-}
-
-
-void MainWindow::on_SearchScientist_textEdited(const QString &arg1)
-{
-    displayScientistTable(arg1);
+    //qDebug() << rowID;
 }
