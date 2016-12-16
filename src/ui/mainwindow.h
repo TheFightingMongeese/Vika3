@@ -43,6 +43,10 @@ private slots:
 
 
 
+    void on_tableWidgetScientists_clicked(const QModelIndex &index);
+
+    void on_btnRemoveScientist_clicked();
+
 private:
     Ui::MainWindow *ui;
     ScientistService _scientistService;

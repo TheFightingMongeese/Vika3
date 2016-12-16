@@ -50,6 +50,7 @@ private:
      * @return a vector of scientists
      */
     std::vector<Scientist> queryScientists(QString sqlQuery);
+    bool removeScientist(Scientist scientist);
 
     QSqlDatabase db;
 };

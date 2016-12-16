@@ -192,3 +192,31 @@ void MainWindow::on_btnAddComputer_clicked()
     }
 }
 
+
+
+
+void MainWindow::on_btnRemoveScientist_clicked()
+{
+    int currentlySelectedScientistIndex = ui->tableWidgetScientists->currentIndex().row();
+
+    Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
+
+    // bool success =  _scientistService.removeScientist(currentlySelectedScientist);
+
+
+    /*
+    if(success)
+    {
+        displayScientistTable();
+        ui -> btnRemoveScientist -> setEnabled(false);
+    }
+    else
+    {
+        //Error
+    }*/
+}
+
+void MainWindow::on_tableWidgetScientists_clicked(const QModelIndex &index)
+{
+    ui->btnRemoveScientist->setEnabled(true);
+}
