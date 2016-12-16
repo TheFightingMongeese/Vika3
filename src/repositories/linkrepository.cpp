@@ -40,6 +40,21 @@ bool LinkRepository::addLink(QString scientistId, QString computerId)
 }
 
 bool LinkRepository::removeLink(QString scientistId, QString computerId)
+
+/*vector<Link> LinkRepository::searchForLinks(string searchTerm)         á eftir að útfæra SQL fallið til að leita af ID eftir nafni
+{
+    stringstream sqlQuery;
+    sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << searchTerm.toStdString() << "%"
+           << "' UNION "
+           << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm.toStdString()  << "%"
+           << "' UNION "
+           << "SELECT * FROM Scientists WHERE yearDied LIKE '%" << searchTerm.toStdString()  << "%'";
+
+    return queryScientists(QString::fromStdString(sqlQuery.str()));
+}*/
+
+bool LinkRepository::removeLink(QString scientistId, QString computerId)
+
 {
     db.open();
 
