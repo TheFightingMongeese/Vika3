@@ -6,6 +6,7 @@
 #include <QTableWidgetItem>
 
 #include "ui/editscientist.h"
+#include "ui/editcomputer.h"
 #include "models/computer.h"
 #include "models/scientist.h"
 #include "services/computerservice.h"
@@ -30,11 +31,15 @@ private slots:
 
     void on_btnAddScientist_clicked();
 
+    void on_btnAddComputer_clicked();
+
     void on_SearchScientist_textEdited(const QString &filter);
 
     void on_SearchComputers_textEdited(const QString &filter);
 
-    void on_tableWidgetScientists_itemClicked(QTableWidgetItem *item);
+    void on_tableWidgetScientists_itemDoubleClicked(QTableWidgetItem *item);
+
+    void on_tableWidgetComputers_itemDoubleClicked(QTableWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
@@ -43,6 +48,9 @@ private:
 
     std::vector<Scientist> currentScientist;
     std::vector<Scientist> currentlyDisplayedScientist;
+
+    std::vector<Computer> currentComputer;
+    std::vector<Computer> currentlyDisplayedComputer;
 
     void displayScientistTable(QString filter = "");
     void displayComputerTable(QString filter = "");
