@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="Tabs">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="TabScientist">
        <attribute name="title">
@@ -31,6 +31,13 @@
            <widget class="QPushButton" name="btnAddScientist">
             <property name="text">
              <string>Add</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnRemoveScientist">
+            <property name="text">
+             <string>Remove</string>
             </property>
            </widget>
           </item>
@@ -92,6 +99,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="btnRemoveComputer">
+            <property name="text">
+             <string>Remove</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -147,7 +161,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

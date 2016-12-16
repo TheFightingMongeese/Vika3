@@ -44,9 +44,15 @@ private slots:
 
 
 
+
+    void on_tableWidgetScientists_clicked(const QModelIndex &index);
+
+    void on_btnRemoveScientist_clicked();
+
     void on_tableWidgetRelations_itemClicked(QTableWidgetItem *item);
 
     void on_tableWidgetRelations_activated(const QModelIndex &index);
+
 
 private:
     Ui::MainWindow *ui;
