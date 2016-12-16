@@ -2,7 +2,6 @@
 #define EDITSCIENTIST_H
 
 #include <QDialog>
-#include <QDebug>
 #include <string>
 #include "models/scientist.h"
 
@@ -19,7 +18,6 @@ public:
     ~EditScientist();
 
     Scientist getScientist();
-    void setScientist();
     void setScientist(Scientist s);
 
 private slots:
