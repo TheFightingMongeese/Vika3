@@ -41,6 +41,10 @@ private slots:
 
     void on_tableWidgetComputers_itemDoubleClicked(QTableWidgetItem *item);
 
+    void on_SearchRelations_textEdited(const QString &arg1);
+
+    void on_BtnAddRelations_clicked();
+
 private:
     Ui::MainWindow *ui;
     ScientistService _scientistService;

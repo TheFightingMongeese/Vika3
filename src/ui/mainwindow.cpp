@@ -105,7 +105,51 @@ void MainWindow::displayComputerTable(QString filter)
         }
      }
 }
+/*                                                                     Reyna útfæra display relations hérna
+void MainWindow::displayScientistTable(QString filter)
+{
+    std::vector<Scientist> scientists;
 
+    if(filter.isEmpty())
+    {
+        scientists = _scientistService.getAllScientists("name", true);
+    }
+    else
+    {
+        scientists = _scientistService.searchForScientists(filter.toStdString());
+    }
+
+    QTableWidget *table = ui->tableWidgetScientists;
+    table->clear();
+
+    QStringList tableHeader;
+    tableHeader << "ID" << "Name" << "Gender" << "Year born" << "Year of death";
+    table->setColumnCount(tableHeader.size());
+    table->setRowCount(scientists.size());
+    table->setHorizontalHeaderLabels(tableHeader);
+
+    if(scientists.size() > 0)
+    {
+        for(unsigned int i = 0; i < scientists.size(); i++)
+        {
+            Scientist s = scientists.at(i);
+            QString scientistID = QString::number(s.getId());
+            QString name = QString::fromStdString(s.getName());
+            QString sexType = QString::fromStdString(utils::sexToString(s.getSex()));
+            QString yearBorn = QString::number(s.getYearBorn());
+            QString yearDied = QString::number(s.getYearDied());
+
+
+            qDebug() << scientistID << name;
+
+            table->setItem(i, 0, new NumberWidgetItem(scientistID));
+            table->setItem(i, 1, new QTableWidgetItem(name));
+            table->setItem(i, 2, new QTableWidgetItem(sexType));
+            table->setItem(i, 3, new QTableWidgetItem(yearBorn));
+            table->setItem(i, 4, new QTableWidgetItem(yearDied));
+        }
+    }
+}*/
 void MainWindow::on_Tabs_currentChanged(int index)
 {
     switch(index)
@@ -116,6 +160,10 @@ void MainWindow::on_Tabs_currentChanged(int index)
     case 1:
         displayComputerTable();
         break;
+   /* case 2:                                // bætti við display relations table, á eftir að útfæra
+        displayRelationsTable();
+        break;*/
+
     }
 
 }
@@ -191,4 +239,17 @@ void MainWindow::on_btnAddComputer_clicked()
         _computerService.addComputer(addComputer->getComputer());
         displayComputerTable();
     }
+}
+
+void MainWindow::on_SearchRelations_textEdited(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_BtnAddRelations_clicked()
+{
+
+
+
+
 }
