@@ -4,15 +4,15 @@
 #include <cstdlib>
 
 namespace utils {
-    std::vector<std::string> split(std::string line, char delimeter)
+    std::vector<QString> split(QString line, char delimeter)
     {
-        std::vector<std::string> result;
+        std::vector<QString> result;
 
-        std::string currentWord = "";
+        QString currentWord = "";
 
         for (unsigned int i = 0; i < line.length(); i++)
         {
-            char currentChar = line[i];
+            QChar currentChar = line[i];
 
             if (currentChar == delimeter)
             {
@@ -39,18 +39,18 @@ namespace utils {
         return result;
     }
 
-    int stringToInt(std::string str)
+    int stringToInt(QString str)
     {
-        return atoi(str.c_str());
+        return str.toInt();
     }
 
-    std::string stringToLower(std::string str)
+    QString stringToLower(QString str)
     {
-        std::string result = "";
+        QString result = "";
 
         for (unsigned int i = 0; i < str.length(); i++)
         {
-            char currentCharacter = str[i];
+            QChar currentCharacter = str[i];
 
             // http://www.asciitable.com/
             if (currentCharacter <= 90 && currentCharacter >= 65)
@@ -66,11 +66,11 @@ namespace utils {
         return result;
     }
 
-    std::string intToString(int number)
+    QString intToString(int number)
     {
         std::stringstream stream;
         stream << number;
-        return stream.str();
+        return QString::fromStdString(stream.str());
     }
 
     enum sexType intToSex(int number)
@@ -83,12 +83,12 @@ namespace utils {
         return static_cast<enum computerType>(number);
     }
 
-    enum sexType stringToSex(std::string str)
+    enum sexType stringToSex(QString str)
     {
         return intToSex(stringToInt(str));
     }
 
-    std::string sexToString(sexType type)
+    QString sexToString(sexType type)
     {
         return type == sexType::male ? "Male" : "Female";
     }

@@ -13,7 +13,7 @@ Scientist::~Scientist()
     destroyComputers();
 }
 
-Scientist::Scientist(string name, enum sexType sex, int yearBorn){
+Scientist::Scientist(QString name, enum sexType sex, int yearBorn){
     id = 0;
     this->name = name;
     this->sex = sex;
@@ -21,7 +21,7 @@ Scientist::Scientist(string name, enum sexType sex, int yearBorn){
     this->yearDied = 0;
 }
 
-Scientist::Scientist(string name, enum sexType sex, int yearBorn, int yearDied)
+Scientist::Scientist(QString name, enum sexType sex, int yearBorn, int yearDied)
 {
     id = 0;
     this->name = name;
@@ -30,7 +30,7 @@ Scientist::Scientist(string name, enum sexType sex, int yearBorn, int yearDied)
     this->yearDied = yearDied;
 }
 
-Scientist::Scientist(unsigned int id, std::string name, sexType sex, int yearBorn, int yearDied)
+Scientist::Scientist(unsigned int id, QString name, sexType sex, int yearBorn, int yearDied)
 {
     this->id = id;
     this->name = name;
@@ -44,7 +44,7 @@ unsigned int Scientist::getId()
     return id;
 }
 
-std::string Scientist::getName() const
+QString Scientist::getName() const
 {
     return name;
 }
@@ -81,12 +81,12 @@ void Scientist::setComputers(std::vector<Computer> newComputers)
     }
 }
 
-bool Scientist::contains(string searchTerm)
+bool Scientist::contains(QString searchTerm)
 {
-    string searchTermLower = utils::stringToLower(searchTerm);
+    QString searchTermLower = utils::stringToLower(searchTerm);
 
-    string nameLower = utils::stringToLower(name);
-    if (nameLower.find(searchTermLower) != string::npos)
+    QString nameLower = utils::stringToLower(name);
+    if (nameLower.contains(searchTermLower) != string::npos)
     {
         return true;
     }
@@ -99,18 +99,18 @@ bool Scientist::contains(string searchTerm)
         return true;
     }
 
-    string yearBornString = utils::intToString(yearBorn);
+    QString yearBornString = utils::intToString(yearBorn);
 
-    if (yearBornString.find(searchTerm) != string::npos)
+    if (yearBornString.contains(searchTerm) != string::npos)
     {
         return true;
     }
 
     if (yearDied != 0)
     {
-        string yearDiedString = utils::intToString(yearDied);
+        QString yearDiedString = utils::intToString(yearDied);
 
-        if (yearDiedString.find(searchTerm) != string::npos)
+        if (yearDiedString.contains(searchTerm) != string::npos)
         {
             return true;
         }

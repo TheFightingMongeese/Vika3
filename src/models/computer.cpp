@@ -7,7 +7,7 @@ Computer::Computer()
 
 }
 
-Computer::Computer(string name, enum computerType type)
+Computer::Computer(QString name, enum computerType type)
 {
     id = 0;
     this->name = name;
@@ -15,7 +15,7 @@ Computer::Computer(string name, enum computerType type)
     this->yearBuilt = 0;
 }
 
-Computer::Computer(string name, enum computerType type, int yearBuilt)
+Computer::Computer(QString name, enum computerType type, int yearBuilt)
 {
     id = 0;
     this->name = name;
@@ -23,7 +23,7 @@ Computer::Computer(string name, enum computerType type, int yearBuilt)
     this->yearBuilt = yearBuilt;
 }
 
-Computer::Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt)
+Computer::Computer(unsigned int id, QString name, enum computerType type, int yearBuilt)
 {
     this->id = id;
     this->name = name;
@@ -36,7 +36,7 @@ unsigned int Computer::getId()
     return id;
 }
 
-string Computer::getName()
+QString Computer::getName()
 {
     return name;
 }
@@ -51,7 +51,7 @@ enum computerType Computer::getType()
     return type;
 }
 
-std::string Scientist::getSexAsString()
+QString Scientist::getSexAsString()
 {
     if (sex == sexType::male)
     {
@@ -63,7 +63,7 @@ std::string Scientist::getSexAsString()
     }
 }
 
-std::string Computer::getTypeAsString()
+QString Computer::getTypeAsString()
 {
     if (type == computerType::Electronic)
     {

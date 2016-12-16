@@ -29,7 +29,7 @@ void MainWindow::displayScientistTable(QString filter)
     }
     else
     {
-        scientists = _scientistService.searchForScientists(filter.toStdString());
+        scientists = _scientistService.searchForScientists(filter);
     }
 
     QTableWidget *table = ui->tableWidgetScientists;
@@ -47,8 +47,8 @@ void MainWindow::displayScientistTable(QString filter)
         {
             Scientist s = scientists.at(i);
             QString scientistID = QString::number(s.getId());
-            QString name = QString::fromStdString(s.getName());
-            QString sexType = QString::fromStdString(utils::sexToString(s.getSex()));
+            QString name = s.getName();
+            QString sexType = utils::sexToString(s.getSex());
             QString yearBorn = QString::number(s.getYearBorn());
             QString yearDied = QString::number(s.getYearDied());
 
@@ -73,7 +73,7 @@ void MainWindow::displayComputerTable(QString filter)
     }
     else
     {
-        computers = _computerService.searchForComputers(filter.toStdString());
+        computers = _computerService.searchForComputers(filter);
     }
 
     QTableWidget *table = ui->tableWidgetComputers;
@@ -91,8 +91,8 @@ void MainWindow::displayComputerTable(QString filter)
         {
             Computer c = computers.at(i);
             QString computerID = QString::number(c.getId());
-            QString name = QString::fromStdString(c.getName());
-            QString type = QString::fromStdString(c.getTypeAsString());
+            QString name = c.getName();
+            QString type = c.getTypeAsString();
             QString yearBuilt = QString::number(c.getYearBuilt());
 
             qDebug() << computerID << name;
@@ -175,7 +175,7 @@ void MainWindow::on_btnAddScientist_clicked()
 
     if(addScientist->exec())
     {
-        qDebug() << QString::fromStdString(addScientist->getScientist().getName());
+        qDebug() << addScientist->getScientist().getName();
         _scientistService.addScientist(addScientist->getScientist());
         displayScientistTable();
     }
@@ -197,7 +197,7 @@ void MainWindow::on_tableWidgetScientists_itemDoubleClicked(QTableWidgetItem *it
     int rowID = item->row();
 
     int id = table->item(rowID, 0)->text().toInt();
-    string name = table->item(rowID, 1)->text().toStdString();
+    QString name = table->item(rowID, 1)->text();
     sexType gender = sexType(table->item(rowID, 2)->text().toInt());
     int birth = table->item(rowID, 3)->text().toInt();
     int death = table->item(rowID, 4)->text().toInt();
@@ -215,7 +215,7 @@ void MainWindow::on_tableWidgetComputers_itemDoubleClicked(QTableWidgetItem *ite
     int rowID = item->row();
 
     int id = table->item(rowID, 0)->text().toInt();
-    string name = table->item(rowID, 1)->text().toStdString();
+    QString name = table->item(rowID, 1)->text();
     computerType type = computerType(table->item(rowID, 2)->text().toInt());
     int built = table->item(rowID, 3)->text().toInt();
 
@@ -235,7 +235,7 @@ void MainWindow::on_btnAddComputer_clicked()
 
     if(addComputer->exec())
     {
-        qDebug() << QString::fromStdString(addComputer->getComputer().getName());
+        qDebug() << addComputer->getComputer().getName();
         _computerService.addComputer(addComputer->getComputer());
         displayComputerTable();
     }

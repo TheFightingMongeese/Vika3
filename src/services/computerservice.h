@@ -19,14 +19,14 @@ public:
      * @param orderAscending Should the list be sorted in ascending order?
      * @return a vector containing all scientists in the repository
      */
-    std::vector<Computer> getAllComputers(std::string orderBy, bool orderAscending);
+    std::vector<Computer> getAllComputers(QString orderBy, bool orderAscending);
 
     /**
      * @brief searchForComputers fetches all computers filtered on searchTerm
      * @param searchTerm Contains the input that the user wishes to filter on
      * @return a vector of computers filtered by searchTerm
      */
-    std::vector<Computer> searchForComputers(std::string searchTerm);
+    std::vector<Computer> searchForComputers(QString searchTerm);
 
     /**
      * @brief addComputer saves a computer model to a database

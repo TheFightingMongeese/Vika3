@@ -27,7 +27,7 @@ void EditComputer::setComputer(Computer c)
 {
     computer = c;
     this->setWindowTitle("Edit");
-    ui->lineEditName->setText(QString::fromStdString(c.getName()));
+    ui->lineEditName->setText(c.getName());
     ui->comboBoxType->setCurrentIndex(c.getType());
     ui->lineEditBuilt->setText(QString::number(c.getYearBuilt()));
 }
@@ -35,7 +35,7 @@ void EditComputer::setComputer(Computer c)
 void EditComputer::on_buttonBoxComputer_accepted()
 {
     int typeID = ui->comboBoxType->currentIndex();
-    std::string name = ui->lineEditName->text().toStdString();
+    QString name = ui->lineEditName->text();
 
     computerType type = computerType(typeID);
     int built = ui->lineEditBuilt->text().toInt();

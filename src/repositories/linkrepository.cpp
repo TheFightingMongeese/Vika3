@@ -12,7 +12,7 @@ LinkRepository::LinkRepository()
     db = utils::getDatabaseConnection();
 }
 
-bool LinkRepository::addLink(string scientistId, string computerId)
+bool LinkRepository::addLink(QString scientistId, QString computerId)
 {
     db.open();
 
@@ -25,8 +25,8 @@ bool LinkRepository::addLink(string scientistId, string computerId)
 
     stringstream sqlQuery;
     sqlQuery << "INSERT INTO relations (scientistId, computerId) VALUES ("
-             << "'" << scientistId << "', "
-             << "'" << computerId << "'"
+             << "'" << scientistId.toStdString() << "', "
+             << "'" << computerId.toStdString() << "'"
              << ")";
 
     if (!query.exec(QString::fromStdString(sqlQuery.str())))
@@ -39,19 +39,22 @@ bool LinkRepository::addLink(string scientistId, string computerId)
     return true;
 }
 
+bool LinkRepository::removeLink(QString scientistId, QString computerId)
+
 /*vector<Link> LinkRepository::searchForLinks(string searchTerm)         á eftir að útfæra SQL fallið til að leita af ID eftir nafni
 {
     stringstream sqlQuery;
-    sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << searchTerm << "%"
+    sqlQuery << "SELECT * FROM Scientists WHERE name LIKE '%" << searchTerm.toStdString() << "%"
            << "' UNION "
-           << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm << "%"
+           << "SELECT * FROM Computers WHERE name LIKE '%" << searchTerm.toStdString()  << "%"
            << "' UNION "
-           << "SELECT * FROM Scientists WHERE yearDied LIKE '%" << searchTerm << "%'";
+           << "SELECT * FROM Scientists WHERE yearDied LIKE '%" << searchTerm.toStdString()  << "%'";
 
     return queryScientists(QString::fromStdString(sqlQuery.str()));
 }*/
 
-bool LinkRepository::removeLink(string scientistId, string computerId)
+bool LinkRepository::removeLink(QString scientistId, QString computerId)
+
 {
     db.open();
 
@@ -64,8 +67,8 @@ bool LinkRepository::removeLink(string scientistId, string computerId)
 
     stringstream sqlQuery;
     sqlQuery << "DELETE FROM relations WHERE "
-             << "scientistId = '" << scientistId << "' AND "
-             << "computerId = '" << computerId << "'";
+             << "scientistId = '" << scientistId.toStdString() << "' AND "
+             << "computerId = '" << computerId.toStdString() << "'";
 
     if (!query.exec(QString::fromStdString(sqlQuery.str())))
     {

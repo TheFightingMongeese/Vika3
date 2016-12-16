@@ -19,14 +19,14 @@ public:
      * @brief getAllScientists fetches all scientists from the database
      * @return a vector containing all scientists in the database
      */
-    std::vector<Scientist> getAllScientists(std::string orderBy, bool orderAscending);
+    std::vector<Scientist> getAllScientists(QString orderBy, bool orderAscending);
 
     /**
      * @brief searchForScientists fetches all scientists from the database and filters them on searchTerm
      * @param searchTerm Contains the input that the user wishes to filter on
      * @return a vector of scientists filtered by searchTerm
      */
-    std::vector<Scientist> searchForScientists(std::string searchTerm);
+    std::vector<Scientist> searchForScientists(QString searchTerm);
 
     /**
      * @brief addScientist saves a scientist model to the database

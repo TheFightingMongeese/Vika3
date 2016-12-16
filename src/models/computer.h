@@ -1,7 +1,7 @@
 #ifndef COMPUTER_H
 #define COMPUTER_H
 
-#include <string>
+#include <QString>
 #include <vector>
 
 // Computer can just include scientist like normally
@@ -22,16 +22,16 @@ class Computer
 {
 public:
     Computer();
-    Computer(std::string name, enum computerType type);
-    Computer(std::string name, enum computerType type, int yearBuilt);
-    Computer(unsigned int id, std::string name, enum computerType type, int yearBuilt);
+    Computer(QString name, enum computerType type);
+    Computer(QString name, enum computerType type, int yearBuilt);
+    Computer(unsigned int id, QString name, enum computerType type, int yearBuilt);
 
     unsigned int getId();
-    std::string getName();
+    QString getName();
     enum computerType getType();
-    std::string getTypeAsString();
+    QString getTypeAsString();
 
-    std::string getTypeName();
+    QString getTypeName();
     int getYearBuilt();
     bool wasBuilt();
     std::vector<Scientist> getScientists();
@@ -40,7 +40,7 @@ public:
 
 private:
     unsigned int id;
-    std::string name;
+    QString name;
     enum computerType type;
     int yearBuilt;
 
