@@ -19,8 +19,7 @@ SOURCES += main.cpp \
     services/linkservice.cpp \
     ui/mainwindow.cpp \
     ui/editscientist.cpp \
-    ui/numberwidgetitem.cpp \
-    ui/editcomputer.cpp
+    ui/numberwidgetitem.cpp
 
 HEADERS += \
     models/scientist.h \

@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTableWidgetItem>
 #include <vector>
 
 #include "ui/editscientist.h"
@@ -33,8 +32,6 @@ private slots:
     void on_SearchScientist_textEdited(const QString &arg1);
 
 
-
-    void on_tableWidgetScientists_itemClicked(QTableWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

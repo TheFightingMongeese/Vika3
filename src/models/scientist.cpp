@@ -54,17 +54,6 @@ enum sexType Scientist::getSex() const
     return sex;
 }
 
-std::string Scientist::getSexAsString()
-{
-    if (sex == sexType::male)
-    {
-        return "Male";
-    }
-    else
-    {
-        return "Female";
-    }
-}
 
 int Scientist::getYearBorn() const
 {
