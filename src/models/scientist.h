@@ -27,6 +27,7 @@ public:
     unsigned int getId();
     std::string getName() const;
     enum sexType getSex() const;
+    std::string getSexAsString();
     int getYearBorn() const;
     int getYearDied() const;
     std::vector<Computer*> getComputers() const;
@@ -40,7 +41,7 @@ private:
 
     unsigned int id;
     std::string name;
-    enum sexType sex;
+    sexType sex;
     int yearBorn;
     int yearDied;
 

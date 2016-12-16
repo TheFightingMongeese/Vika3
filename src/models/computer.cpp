@@ -51,6 +51,18 @@ enum computerType Computer::getType()
     return type;
 }
 
+std::string Scientist::getSexAsString()
+{
+    if (sex == sexType::male)
+    {
+        return "Male";
+    }
+    else
+    {
+        return "Female";
+    }
+}
+
 std::string Computer::getTypeAsString()
 {
     if (type == computerType::Electronic)

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <vector>
+#include <QTableWidgetItem>
 
 #include "ui/editscientist.h"
 #include "models/computer.h"
@@ -29,9 +30,11 @@ private slots:
 
     void on_btnAddScientist_clicked();
 
-    void on_SearchScientist_textEdited(const QString &arg1);
+    void on_SearchScientist_textEdited(const QString &filter);
 
+    void on_SearchComputers_textEdited(const QString &filter);
 
+    void on_tableWidgetScientists_itemClicked(QTableWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
@@ -42,7 +45,7 @@ private:
     std::vector<Scientist> currentlyDisplayedScientist;
 
     void displayScientistTable(QString filter = "");
-    void displayComputerTable();
+    void displayComputerTable(QString filter = "");
 };
 
 #endif // MAINWINDOW_H
