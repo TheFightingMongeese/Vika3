@@ -126,6 +126,16 @@
        <attribute name="title">
         <string>Relations</string>
        </attribute>
+       <widget class="QTableWidget" name="tableWidgetRelations">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>41</y>
+          <width>641</width>
+          <height>421</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
