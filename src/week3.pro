@@ -20,7 +20,6 @@ SOURCES += main.cpp \
     ui/mainwindow.cpp \
     ui/editscientist.cpp \
     ui/numberwidgetitem.cpp \
-    ui/editcomputer.cpp
 
 HEADERS += \
     models/scientist.h \
