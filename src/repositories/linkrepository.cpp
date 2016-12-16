@@ -39,7 +39,7 @@ bool LinkRepository::addLink(QString scientistId, QString computerId)
     return true;
 }
 
-bool LinkRepository::removeLink(QString scientistId, QString computerId)
+
 
 /*vector<Link> LinkRepository::searchForLinks(string searchTerm)         á eftir að útfæra SQL fallið til að leita af ID eftir nafni
 {

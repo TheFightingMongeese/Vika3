@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QTabWidget" name="TabRelations">
+     <widget class="QTabWidget" name="Tabs">
       <property name="currentIndex">
        <number>2</number>
       </property>
@@ -122,46 +122,10 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="TabRelations">
        <attribute name="title">
         <string>Relations</string>
        </attribute>
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>761</width>
-          <height>461</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="SearchRelations">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>751</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="placeholderText">
-         <string>Search Relations</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BtnAddRelations">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>0</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
       </widget>
      </widget>
     </item>
@@ -173,7 +137,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>
