@@ -1,0 +1,20 @@
+Skil 3
+
+Í þessari útgáfu á að skrifa gluggaforrit í Qt.
+
+Virkni þess á að vera sú sama og í viku 2, þ.e. með SQL bakenda, kerfi sem getur skráð vísindamenn í tölvunarfræði, frægar tölvur, og tengingar þar á milli, birta lista, leita, raða etc. Sömu kröfur gilda varðandi viðhaldanleika kóða, notkun á Git og Qt.
+
+Einkunn verður gefin samkvæmt eftirfarandi skiptingu:
+
+(15%) Þekktir tölvunarfræðingar: geta skráð og breytt upplýsingum um þá, birt lista
+(15%) Þekktar tölvur: geta skráð og breytt upplýsingum um þær, birt lista
+(15%) Tengingar milli tölvunarfræðinga og tölva
+(15%) Gæði viðmóts: er passað upp á hluti eins og taborder, að stýringar fylgi stærð glugga, passa að skjámyndir verði ekki of flóknar, að notendur geti auðveldlega fundið út hvaða aðgerðir eru í boði og hvernig á að framkvæma þær, samræmi í leturstærðum, litavali o.s.frv.
+(10%) Gæði kóða (lagskipting, nafnagiftir/inndráttur/o.s.frv., sjá viku 2)
+(10%) Hópasamstarf
+(20%) Aukavirkni (dæmi: geta skráð og birt myndir af vísindamönnum/tölvum, o.fl.)
+
+
+----------------------------------------------------------------------------------------------------------
+Muna að það þarf líklegast að færa Gagnagrunninn í build skránna
+Til að edita þarf að tvíklikka á vísindamann t.d.
